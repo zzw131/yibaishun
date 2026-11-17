@@ -1,29 +1,24 @@
-# 医百顺 Figma → AI Studio
+# 医百顺患者端 Figma 设计包
 
-这是「发现-小视频」画板的设计资料包和 React + Vite + TypeScript 起始工程。启动页用于验证工程可运行，页面还原以原稿资料为准。
+源文件涵盖「患者端-线上」「缺省」「组件」三个 Figma 页面。画板目录有 864 个可定位的 PNG 参考项，包含 747 个 Frame、50 个组件，以及画布上下文。此仓库用于把画板、素材、页面结构和模拟业务流程交给 Gemini。网页在浏览器本地演示，数据存放于项目目录，无需部署。
 
-## 本地启动
+## Gemini 阅读顺序
 
-```sh
-npm ci
-npm run dev
-```
+1. [实施说明](design-reference/GEMINI_HANDOFF.md)
+2. [页面层级与点击跳转](design-reference/PAGE_RELATIONSHIPS.md)
+3. [全文件画板目录](design-reference/FRAME_CATALOG.json)
+4. [分页面文字索引](design-reference/SCREEN_TEXT)
+5. [源素材索引](design-reference/SOURCE_ASSETS.json)
+6. [画布层级盘点](design-reference/FIGMA_INVENTORY.json)和 [1:1 实现规则](AGENTS.md)
 
-`npm run build` 同时运行 TypeScript 检查和生产构建。工程启动无需密钥或环境变量。
+大尺寸独立原图通过同一私有仓库的 [源素材附件](https://github.com/zzw131/yibaishun/releases/tag/figma-source-v1) 提供。素材索引记录解压路径，所有画板图像可在 `main` 直接读取。
 
-## 设计入口
+「发现-小视频」精细样例包括[原始画板](design-reference/original.png)、[逐层规范](design-reference/FIGMA_SPEC.md)、[图层数据](design-reference/figma-layers.json)和[设计值](design-reference/design-tokens.json)。
 
-- [原始画板 375 × 1530](design-reference/original.png)
-- [实施规范](design-reference/FIGMA_SPEC.md)
-- [图层与组件数据](design-reference/figma-layers.json)
-- [设计值](design-reference/design-tokens.json)
-- [素材索引](design-reference/assets.json)
-- [1:1 还原规则](AGENTS.md)
+## 导入 Google AI Studio
 
-## 在 AI Studio Build 中使用
+在 Build 提示框的加号菜单选择 **Import from GitHub**，选择有权访问的私有仓库 `zzw131/yibaishun`。[Google AI Studio Build 文档](https://ai.google.dev/gemini-api/docs/aistudio-build-mode#how-can-i-use-github-with-my-apps)
 
-在 Build 提示框的加号菜单选择 **Import from GitHub**，用有访问权限的 GitHub 账户选择私有仓库。[Google AI Studio Build 文档](https://ai.google.dev/gemini-api/docs/aistudio-build-mode#how-can-i-use-github-with-my-apps)
+> 先读 AGENTS.md 和 design-reference/GEMINI_HANDOFF.md，按 PAGE_RELATIONSHIPS.md 理解业务与导航。用 FRAME_CATALOG.json 的本地 PNG 路径和文字索引分模块读图。实现可本地运行的患者端网页，使用项目内的虚构数据串联完整演示流程。对照原图完成走查和构建。
 
-导入后可使用以下提示词。
-
-> 先读 AGENTS.md 和 design-reference/FIGMA_SPEC.md。以 design-reference/original.png 为视觉基准，按节点数据、设计值与原素材实现 375 × 1530 的「发现-小视频」画板。将页面实现为可维护的 React 组件，保留原素材的遮罩、裁切和尺寸。完成后运行构建，并在浏览器中对照原稿截图。
+仓库保留先前的 React + Vite + TypeScript 起始入口。用 `npm ci` 安装、`npm run dev` 启动，`npm run build` 检查和构建。业务实现以交接资料为依据，由 Gemini 完成。

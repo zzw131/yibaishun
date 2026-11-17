@@ -1,0 +1,66 @@
+{
+  "schema": [
+    "layerId",
+    "text",
+    "frameRelativeRectPx",
+    "fontFamily",
+    "fontSizePx",
+    "fontWeight",
+    "lineHeight",
+    "letterSpacing",
+    "firstSolidFill"
+  ],
+  "notes": "Figma visible text excerpts per frame, up to 24 distinct short strings. Bounds are frame-relative. Font and fill are from the first styled span; the PNG is the visual reference.",
+  "frames": {
+    "0:115191": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115196": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115205": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115207": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115216": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115238": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115246": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115253": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115265": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115270": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    }
+  }
+}

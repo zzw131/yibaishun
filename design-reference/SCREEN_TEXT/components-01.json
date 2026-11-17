@@ -1,0 +1,333 @@
+{
+  "schema": [
+    "layerId",
+    "text",
+    "frameRelativeRectPx",
+    "fontFamily",
+    "fontSizePx",
+    "fontWeight",
+    "lineHeight",
+    "letterSpacing",
+    "firstSolidFill"
+  ],
+  "notes": "Figma visible text excerpts per frame, up to 24 distinct short strings. Bounds are frame-relative. Font and fill are from the first styled span; the PNG is the visual reference.",
+  "frames": {
+    "0:114952": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114957": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114963": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114972": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114974": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114984": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114986": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114996": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:114998": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115000": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115010": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115017": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115030": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115032": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115034": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115036": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115038": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115040": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115045": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": [
+        [
+          "0:115047",
+          "Sketch",
+          [
+            26.5,
+            1.5,
+            39,
+            17
+          ],
+          "PingFang TC",
+          12,
+          500,
+          "auto",
+          0,
+          "#030303"
+        ]
+      ]
+    },
+    "0:115057": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115062": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": [
+        [
+          "0:115064",
+          "Sketch",
+          [
+            26,
+            3.5,
+            40,
+            14
+          ],
+          "SF Pro",
+          12,
+          400,
+          "auto",
+          0,
+          "#030303"
+        ]
+      ]
+    },
+    "0:115074": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": [
+        [
+          "0:115083",
+          "100%",
+          [
+            307,
+            4.5,
+            33,
+            17
+          ],
+          "PingFang SC",
+          12,
+          400,
+          "auto",
+          0,
+          "#030303"
+        ],
+        [
+          "0:115085",
+          "9:41 AM",
+          [
+            163,
+            4,
+            49,
+            17
+          ],
+          "PingFang SC",
+          12,
+          600,
+          "auto",
+          0,
+          "#030303"
+        ],
+        [
+          "I0:115086;0:115064",
+          "Sketch",
+          [
+            26,
+            5.5,
+            40,
+            14
+          ],
+          "SF Pro",
+          12,
+          400,
+          "auto",
+          0,
+          "#030303"
+        ]
+      ]
+    },
+    "0:115087": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115092": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115094": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115096": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115102": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115110": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115112": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115114": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115117": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115123": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115128": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115134": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115136": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": [
+        [
+          "0:115139",
+          "到院自取",
+          [
+            5.5,
+            2,
+            45,
+            15
+          ],
+          "PingFang SC",
+          11,
+          500,
+          "auto",
+          0,
+          "#ffffff"
+        ]
+      ]
+    },
+    "0:115140": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115164": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115171": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": [
+        [
+          "0:115174",
+          "配送到家",
+          [
+            5.5,
+            2,
+            45,
+            15
+          ],
+          "PingFang SC",
+          11,
+          500,
+          "auto",
+          0,
+          "#ffffff"
+        ]
+      ]
+    },
+    "0:115175": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    },
+    "0:115181": {
+      "layoutMode": "NONE",
+      "clipsContent": false,
+      "text": []
+    }
+  }
+}
