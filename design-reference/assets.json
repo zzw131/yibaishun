@@ -1,0 +1,911 @@
+{
+  "source": {
+    "url": "https://www.figma.com/design/ESSsVuzonDTacYEI7slHtT?node-id=0-41862",
+    "fileName": "医百顺患者端-小程序",
+    "page": {
+      "id": "0:1",
+      "name": "患者端-线上"
+    },
+    "frame": {
+      "id": "0:41862",
+      "name": "发现-小视频",
+      "width": 375,
+      "height": 1530,
+      "clipsContent": true
+    },
+    "originalLinkNodeId": "0:41918",
+    "extractionDate": "2026-11-17"
+  },
+  "screenshot": {
+    "path": "design-reference/original.png",
+    "width": 375,
+    "height": 1530,
+    "sha256": "bb86229de670ecdd2967a05290d471600cbddd002ac1b7cca606bd263c8933c6"
+  },
+  "assets": [
+    {
+      "name": "imgBitmap1",
+      "format": "png",
+      "path": "public/assets/images/imgBitmap1.png",
+      "uses": [
+        {
+          "layerId": "0:41971",
+          "property": "src"
+        },
+        {
+          "layerId": "0:41975",
+          "property": "src"
+        },
+        {
+          "layerId": "0:41979",
+          "property": "src"
+        },
+        {
+          "layerId": "0:41983",
+          "property": "src"
+        }
+      ],
+      "bytes": 100991,
+      "sha256": "28dec424caf63b67f0dca2b2b8e0450a280de6974b2c2fc85118cf30da9ffa5a",
+      "width": 400,
+      "height": 267,
+      "figmaImageHash": "989ff888aa43eabafd1ac09b68a873f19d81a423",
+      "origin": "original Figma image fill",
+      "imageFillNodeIds": [
+        "0:41971",
+        "0:41975",
+        "0:41979",
+        "0:41983"
+      ]
+    },
+    {
+      "name": "imgWebp1",
+      "format": "png",
+      "path": "public/assets/images/imgWebp1.png",
+      "uses": [
+        {
+          "layerId": "0:41997",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42001",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42005",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42009",
+          "property": "src"
+        }
+      ],
+      "bytes": 525075,
+      "sha256": "67d8b3f4cecebcaa0fdd57e94e37bba28d5afcadce5383b1619c11869956a300",
+      "width": 658,
+      "height": 782,
+      "figmaImageHash": "8a310be55fecd36d5754263167c2384911171e34",
+      "origin": "original Figma image fill",
+      "imageFillNodeIds": [
+        "0:41997",
+        "0:42001",
+        "0:42005",
+        "0:42009"
+      ]
+    },
+    {
+      "name": "imgWebp2",
+      "format": "png",
+      "path": "public/assets/illustrations/imgWebp2.png",
+      "uses": [
+        {
+          "layerId": "0:42013",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42017",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42021",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42025",
+          "property": "src"
+        }
+      ],
+      "bytes": 530022,
+      "sha256": "891e05b68997ce4b22ea25d28caa88d0c672b6532cac2e310956e19e21a43e82",
+      "width": 658,
+      "height": 1038,
+      "figmaImageHash": "59444776646d34c589872a0617bc0b4046eabf0f",
+      "origin": "original Figma image fill",
+      "imageFillNodeIds": [
+        "0:42013",
+        "0:42017",
+        "0:42021",
+        "0:42025"
+      ]
+    },
+    {
+      "name": "img1",
+      "format": "png",
+      "path": "public/assets/images/img1.png",
+      "uses": [
+        {
+          "layerId": "0:42053",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42057",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42061",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42065",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42069",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42073",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42077",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42081",
+          "property": "src"
+        }
+      ],
+      "bytes": 4950,
+      "sha256": "016119c0d6ac1497fe1c8876625fbc60a6b8ad7a0d2c1c0813fee5387b5961df",
+      "width": 44,
+      "height": 44,
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "img01",
+      "format": "png",
+      "path": "public/assets/images/img01.png",
+      "uses": [
+        {
+          "layerId": "0:42054",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42058",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42062",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42066",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42070",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42074",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42078",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42082",
+          "property": "maskImage"
+        }
+      ],
+      "bytes": 528,
+      "sha256": "7ae2730e4c231337f1246f87faa68cbbe451045a2bf47bc44bedb9487da26cbe",
+      "width": 44,
+      "height": 44,
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "img2",
+      "format": "png",
+      "path": "public/assets/images/img2.png",
+      "uses": [
+        {
+          "layerId": "0:42054",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42058",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42062",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42066",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42070",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42074",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42078",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42082",
+          "property": "src"
+        }
+      ],
+      "bytes": 17257195,
+      "sha256": "2cb657a873858ceeeb7029a515ebc9c32dc31982c9828654a097a73451491f9a",
+      "width": 3934,
+      "height": 3934,
+      "figmaImageHash": "57708ae0fdefa63ef433e1019eabc4659a8333b9",
+      "origin": "original Figma image fill",
+      "imageFillNodeIds": [
+        "0:42054",
+        "0:42058",
+        "0:42062",
+        "0:42066",
+        "0:42070",
+        "0:42074",
+        "0:42078",
+        "0:42082"
+      ]
+    },
+    {
+      "name": "imgBattery",
+      "format": "svg",
+      "path": "public/assets/icons/imgBattery.svg",
+      "uses": [
+        {
+          "layerId": "0:41868",
+          "property": "src"
+        }
+      ],
+      "bytes": 1643,
+      "sha256": "b96697e6dbbf1e78f770a874028f69e696d965be7dd06a430af32a0f380d2ffc",
+      "width": "26.5",
+      "height": "11.5",
+      "viewBox": "0 0 26.5 11.5",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgBluetooth",
+      "format": "svg",
+      "path": "public/assets/icons/imgBluetooth.svg",
+      "uses": [
+        {
+          "layerId": "0:41875",
+          "property": "src"
+        }
+      ],
+      "bytes": 324,
+      "sha256": "fd2ac278b644ebf3396d8731fdc7a3cb675c528de6e80c71a4c9274f74cf3483",
+      "width": "7.09737",
+      "height": "12.135",
+      "viewBox": "0 0 7.09737 12.135",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgMobileSignal",
+      "format": "svg",
+      "path": "public/assets/icons/imgMobileSignal.svg",
+      "uses": [
+        {
+          "layerId": "I0:41877;0:115050",
+          "property": "src"
+        }
+      ],
+      "bytes": 788,
+      "sha256": "2e586ce610862703845182b66aae46111e50a5d2f71755ce7062b43aca70c50b",
+      "width": "16.5",
+      "height": "10",
+      "viewBox": "0 0 16.5 10",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgWifi",
+      "format": "svg",
+      "path": "public/assets/icons/imgWifi.svg",
+      "uses": [
+        {
+          "layerId": "I0:41877;0:115055",
+          "property": "src"
+        }
+      ],
+      "bytes": 797,
+      "sha256": "17c23c95f9506c6bd54e8985c49fe0f4998086c3dc8279377b66a641db023158",
+      "width": "14.3409",
+      "height": "10",
+      "viewBox": "0 0 14.3409 10",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconSearch",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconSearch.svg",
+      "uses": [
+        {
+          "layerId": "0:41883",
+          "property": "src"
+        }
+      ],
+      "bytes": 1442,
+      "sha256": "c85f5e5bb2628b636b0c98aa62bf46ce54971ba964ab51d102822e3d81ee79c8",
+      "width": "12",
+      "height": "12",
+      "viewBox": "0 0 12 12",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "img20",
+      "format": "svg",
+      "path": "public/assets/icons/img20.svg",
+      "uses": [
+        {
+          "layerId": "0:41905",
+          "property": "src"
+        }
+      ],
+      "bytes": 1434,
+      "sha256": "0d59c7e02f70fa17815a6f2a3c039d53d2f1fb55723679ddd0cf025086982ce6",
+      "width": "83",
+      "height": "31",
+      "viewBox": "0 0 83 31",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconFx",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconFx.svg",
+      "uses": [
+        {
+          "layerId": "0:41926",
+          "property": "src"
+        }
+      ],
+      "bytes": 3073,
+      "sha256": "c632a1892f6ae82e90140b24adf27a5ccb30ea651fad7ec39aebdcbb4fbfd464",
+      "width": "22",
+      "height": "22",
+      "viewBox": "0 0 22 22",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconZxjl",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconZxjl.svg",
+      "uses": [
+        {
+          "layerId": "0:41934",
+          "property": "src"
+        }
+      ],
+      "bytes": 1496,
+      "sha256": "acdada4c8128815d48df5babcbed4cae5de3bcc26ac8a610798f7d8c4848c528",
+      "width": "22",
+      "height": "22",
+      "viewBox": "0 0 22 22",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconMine",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconMine.svg",
+      "uses": [
+        {
+          "layerId": "0:41938",
+          "property": "src"
+        }
+      ],
+      "bytes": 1787,
+      "sha256": "b96b87eba127c16a1bbbe2c0e33f991294832b3fd432a8ce663b3dfbeecefe98",
+      "width": "22",
+      "height": "22",
+      "viewBox": "0 0 22 22",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconSyHui",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconSyHui.svg",
+      "uses": [
+        {
+          "layerId": "0:41943",
+          "property": "src"
+        }
+      ],
+      "bytes": 1328,
+      "sha256": "df9abd68a5434243f3842b353bb292224fdb8d12b4426fbb6e777632f1b92c8c",
+      "width": "22",
+      "height": "22",
+      "viewBox": "0 0 22 22",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconZxjlHui",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconZxjlHui.svg",
+      "uses": [
+        {
+          "layerId": "0:41947",
+          "property": "src"
+        }
+      ],
+      "bytes": 1177,
+      "sha256": "729ccfcf26218f03ac21d5560d8215727dc64bb00320f03a803a5bd7f86fa0e0",
+      "width": "22",
+      "height": "22",
+      "viewBox": "0 0 22 22",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIconMineHui",
+      "format": "svg",
+      "path": "public/assets/icons/imgIconMineHui.svg",
+      "uses": [
+        {
+          "layerId": "0:41959",
+          "property": "src"
+        }
+      ],
+      "bytes": 1232,
+      "sha256": "324b344ccbd3114602fa4601f4c82e7ddc5a670cd0134db8c1844bd37cb22c96",
+      "width": "22",
+      "height": "22",
+      "viewBox": "0 0 22 22",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "img",
+      "format": "svg",
+      "path": "public/assets/icons/img.svg",
+      "uses": [
+        {
+          "layerId": "0:41970",
+          "property": "src"
+        },
+        {
+          "layerId": "0:41974",
+          "property": "src"
+        },
+        {
+          "layerId": "0:41978",
+          "property": "src"
+        },
+        {
+          "layerId": "0:41982",
+          "property": "src"
+        }
+      ],
+      "bytes": 263,
+      "sha256": "127340f554f0f228cb8f2e8bd249eee0a97b828e1ef1cda65c8c22a0c47f4df0",
+      "width": "48",
+      "height": "48",
+      "viewBox": "0 0 48 48",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgBitmap",
+      "format": "svg",
+      "path": "public/assets/illustrations/imgBitmap.svg",
+      "uses": [
+        {
+          "layerId": "0:41971",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:41975",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:41979",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:41983",
+          "property": "maskImage"
+        }
+      ],
+      "bytes": 261,
+      "sha256": "24a0990436f6d6e3cde2208745705f4d516ae361eee0ae2e622c30d141e7b182",
+      "width": "48",
+      "height": "48",
+      "viewBox": "0 0 48 48",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgWebp",
+      "format": "svg",
+      "path": "public/assets/illustrations/imgWebp.svg",
+      "uses": [
+        {
+          "layerId": "0:41997",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42001",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42005",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42009",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42013",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42017",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42021",
+          "property": "maskImage"
+        },
+        {
+          "layerId": "0:42025",
+          "property": "maskImage"
+        }
+      ],
+      "bytes": 272,
+      "sha256": "ffc30a6407a6ae87cf00d71ad8ef3c5c04947ec7407775395191140916fb7c0c",
+      "width": "162",
+      "height": "184",
+      "viewBox": "0 0 162 184",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "imgIcon4",
+      "format": "svg",
+      "path": "public/assets/icons/imgIcon4.svg",
+      "uses": [
+        {
+          "layerId": "0:42091",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42098",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42105",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42112",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42119",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42126",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42133",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42140",
+          "property": "src"
+        }
+      ],
+      "bytes": 1152,
+      "sha256": "db0a5974cab937db9d1631abef59c019edb6dacb29c85426945b48347b033233",
+      "width": "12",
+      "height": "12",
+      "viewBox": "0 0 12 12",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "img3",
+      "format": "svg",
+      "path": "public/assets/icons/img3.svg",
+      "uses": [
+        {
+          "layerId": "0:42147",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42151",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42155",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42159",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42163",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42167",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42171",
+          "property": "src"
+        },
+        {
+          "layerId": "0:42175",
+          "property": "src"
+        }
+      ],
+      "bytes": 840,
+      "sha256": "136808dd795a2c9a0e90f380c0d98ac4251c6143b3e5bf2e3a36ee3c151918b8",
+      "width": "45",
+      "height": "45",
+      "viewBox": "0 0 45 45",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "img4",
+      "format": "svg",
+      "path": "public/assets/icons/img4.svg",
+      "uses": [
+        {
+          "layerId": "0:42180",
+          "property": "src"
+        }
+      ],
+      "bytes": 375,
+      "sha256": "2fe8c67bd262a5b376876034ae60ce3d10c2c88142b2717dc158f3b509c2e3ac",
+      "width": "356.5",
+      "height": "0.5",
+      "viewBox": "0 0 356.5 0.5",
+      "origin": "Figma design-context asset"
+    },
+    {
+      "name": "avatar-fill-original",
+      "format": "png",
+      "path": "public/assets/images/avatar-fill-original.png",
+      "uses": [],
+      "origin": "original Figma image fill",
+      "bytes": 111440,
+      "sha256": "627e54b898c136a1e2e7e59b717c11630af63b2bcdc9b8aad3857471ae495bef",
+      "width": 256,
+      "height": 256,
+      "figmaImageHash": "0bd662fdab6740e2a71e592e7ce9b58da041c744",
+      "imageFillNodeIds": [
+        "0:42053",
+        "0:42052",
+        "0:42057",
+        "0:42056",
+        "0:42061",
+        "0:42060",
+        "0:42065",
+        "0:42064",
+        "0:42069",
+        "0:42068",
+        "0:42073",
+        "0:42072",
+        "0:42077",
+        "0:42076",
+        "0:42081",
+        "0:42080"
+      ]
+    },
+    {
+      "name": "Rectangle 15",
+      "format": "png",
+      "path": "public/assets/images/node-0-41880.png",
+      "uses": [
+        {
+          "layerId": "0:41880",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 175,
+      "sha256": "8da9d41b15811c3a8f928cced7b3956591f22c1ec270aaeb8a71c7e756b3c204",
+      "width": 22,
+      "height": 3
+    },
+    {
+      "name": "Rectangle 3",
+      "format": "png",
+      "path": "public/assets/images/node-0-41881.png",
+      "uses": [
+        {
+          "layerId": "0:41881",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 770,
+      "sha256": "6ef9f884b40716651b70ef60d6a3158ac93bb2d05ba80046685c8ad14f59db5c",
+      "width": 345,
+      "height": 33
+    },
+    {
+      "name": "icon_search",
+      "format": "png",
+      "path": "public/assets/icons/node-0-41883.png",
+      "uses": [
+        {
+          "layerId": "0:41883",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 414,
+      "sha256": "8df9360eda9718b203dfce10014512196df8ee55aa752e03e1057048996ae578",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 4",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42091.png",
+      "uses": [
+        {
+          "layerId": "0:42091",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 9",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42098.png",
+      "uses": [
+        {
+          "layerId": "0:42098",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 10",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42105.png",
+      "uses": [
+        {
+          "layerId": "0:42105",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 11",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42112.png",
+      "uses": [
+        {
+          "layerId": "0:42112",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 12",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42119.png",
+      "uses": [
+        {
+          "layerId": "0:42119",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 13",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42126.png",
+      "uses": [
+        {
+          "layerId": "0:42126",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 14",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42133.png",
+      "uses": [
+        {
+          "layerId": "0:42133",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "Icon - 观看量备份 15",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42140.png",
+      "uses": [
+        {
+          "layerId": "0:42140",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 374,
+      "sha256": "f42718a86fc5f6704c24f24d932c18341be20121ed8da0c7af6f5727480bfa93",
+      "width": 12,
+      "height": 12
+    },
+    {
+      "name": "播放备份",
+      "format": "png",
+      "path": "public/assets/icons/node-0-42147.png",
+      "uses": [
+        {
+          "layerId": "0:42147",
+          "property": "exportSettings"
+        }
+      ],
+      "origin": "Figma PNG export preset",
+      "bytes": 986,
+      "sha256": "147907f258e7be2f9e25d3c0c879d00c676f2e920ac3499f6d5cad2092986235",
+      "width": 45,
+      "height": 45
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.DS_Store
+.CURRENT_STATE.lock
+.env
+.env.*
+*.local
+*.pem
+*.key
+*.p12
+*.log
+
+CURRENT_STATE.md
