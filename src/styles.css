@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #f4f5f7;
+  font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+/* At 375px viewport width, align strictly at top-left (0, 0) for 1:1 pixel comparison.
+   On wider viewports, center horizontally. */
+.viewport-shell {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+@media (min-width: 376px) {
+  .viewport-shell {
+    justify-content: center;
+  }
+}
+
+.fixed-top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 375px;
+  z-index: 40;
+}
+
+@media (min-width: 376px) {
+  .fixed-top-header {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.figma-canvas {
+  position: relative;
+  width: 375px;
+  height: 1530px;
+  overflow: hidden;
+  background-color: #ffffff;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.reset-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.search-input {
+  position: absolute;
+  left: 50px;
+  top: 66px;
+  width: 295px;
+  height: 33px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Noto Sans CJK SC", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 17px;
+  color: #333333;
+  padding: 0;
+  margin: 0;
+  z-index: 3;
+}
