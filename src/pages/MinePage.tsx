@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { BottomTabBar } from '../components/BottomTabBar'
 import { StatusBar, WechatCapsule } from '../components/NavBar'
 import { useAppStore } from '../store/appStore'
 
@@ -146,421 +145,427 @@ export function MinePage() {
   ]
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: 375,
-        height: 778,
-        backgroundColor: '#f6f7f9',
-        overflow: 'hidden',
-        userSelect: 'none',
-      }}
-    >
-      <StatusBar />
-      <WechatCapsule top={28} />
-
-      {/* 用户头像与昵称 (0:54946) */}
-      <button
-        type="button"
-        onClick={() => (user.loggedIn ? navigate('account-settings') : navigate('login'))}
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
+      {/* 固定顶部：状态栏与胶囊 */}
+      <header
         style={{
-          position: 'absolute',
-          left: 20,
-          top: 67,
-          width: 220,
-          height: 58,
-          background: 'transparent',
-          border: 'none',
-          padding: 0,
-          cursor: 'pointer',
-          textAlign: 'left',
+          position: 'relative',
+          width: 375,
+          height: 60,
+          backgroundColor: '#f6f7f9',
+          flexShrink: 0,
+          zIndex: 20,
         }}
       >
-        <img
-          src={user.avatar}
-          alt={user.name}
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            width: 58,
-            height: 58,
-            borderRadius: '50%',
-            display: 'block',
-          }}
-        />
-        <span
-          style={{
-            position: 'absolute',
-            left: 71,
-            top: 16,
-            fontFamily: 'var(--font-sans)',
-            fontSize: 21,
-            fontWeight: 600,
-            lineHeight: '29px',
-            letterSpacing: '0.338px',
-            color: '#333333',
-            whiteSpace: 'nowrap',
-          }}
-        >
-          {user.loggedIn ? user.name : '点击登录'}
-        </span>
-      </button>
+        <StatusBar />
+        <WechatCapsule top={28} />
+      </header>
 
-      {/* 右上消息图标 */}
-      <button
-        type="button"
-        onClick={() => navigate('messages')}
-        aria-label="我的消息"
-        style={{
-          position: 'absolute',
-          left: 328,
-          top: 80,
-          width: 32,
-          height: 30,
-          background: 'transparent',
-          border: 'none',
-          padding: 0,
-          cursor: 'pointer',
-        }}
-      >
-        <img
-          src="/assets/extracted/mine-msg.png"
-          alt=""
-          style={{ position: 'absolute', left: 4, top: 4, width: 24, height: 22, display: 'block' }}
-        />
-      </button>
-
-      {/* 订单快捷状态栏卡片 */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 12,
-          top: 144,
-          width: 351,
-          height: 78,
-          borderRadius: 8,
-          backgroundColor: '#ffffff',
-        }}
-      />
-      {orderButtons.map((btn) => (
-        <button
-          key={btn.label}
-          type="button"
-          onClick={() => navigate('orders', { status: btn.filterStatus })}
-          style={{
-            position: 'absolute',
-            left: btn.labelLeft - 10,
-            top: 148,
-            width: 60,
-            height: 70,
-            background: 'transparent',
-            border: 'none',
-            padding: 0,
-            cursor: 'pointer',
-          }}
-        >
-          <img
-            src={btn.icon}
-            alt={btn.label}
+      {/* 中间可滚动内容区 */}
+      <div className="page-scroll">
+        <div style={{ position: 'relative', width: 375, height: 729 - 60 }}>
+          {/* 用户头像与昵称 (0:54946) */}
+          <button
+            type="button"
+            onClick={() => (user.loggedIn ? navigate('account-settings') : navigate('login'))}
             style={{
               position: 'absolute',
-              left: btn.iconLeft - (btn.labelLeft - 10),
-              top: 4,
-              width: btn.label === '待支付' ? 34 : 30,
-              height: 34,
-              display: 'block',
+              left: 20,
+              top: 7,
+              width: 220,
+              height: 58,
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              textAlign: 'left',
+            }}
+          >
+            <img
+              src={user.avatar}
+              alt={user.name}
+              style={{
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                width: 58,
+                height: 58,
+                borderRadius: '50%',
+                display: 'block',
+              }}
+            />
+            <span
+              style={{
+                position: 'absolute',
+                left: 71,
+                top: 16,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 21,
+                fontWeight: 600,
+                lineHeight: '29px',
+                letterSpacing: '0.338px',
+                color: '#333333',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              {user.loggedIn ? user.name : '点击登录'}
+            </span>
+          </button>
+
+          {/* 右上消息图标 */}
+          <button
+            type="button"
+            onClick={() => navigate('messages')}
+            aria-label="我的消息"
+            style={{
+              position: 'absolute',
+              left: 328,
+              top: 20,
+              width: 32,
+              height: 30,
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+            }}
+          >
+            <img
+              src="/assets/extracted/mine-msg.png"
+              alt=""
+              style={{ position: 'absolute', left: 4, top: 4, width: 24, height: 22, display: 'block' }}
+            />
+          </button>
+
+          {/* 订单快捷状态栏卡片 */}
+          <div
+            style={{
+              position: 'absolute',
+              left: 12,
+              top: 84,
+              width: 351,
+              height: 78,
+              borderRadius: 8,
+              backgroundColor: '#ffffff',
+            }}
+          />
+          {orderButtons.map((btn) => (
+            <button
+              key={btn.label}
+              type="button"
+              onClick={() => navigate('orders', { status: btn.filterStatus })}
+              style={{
+                position: 'absolute',
+                left: btn.labelLeft - 10,
+                top: 88,
+                width: 60,
+                height: 70,
+                background: 'transparent',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+              }}
+            >
+              <img
+                src={btn.icon}
+                alt={btn.label}
+                style={{
+                  position: 'absolute',
+                  left: btn.iconLeft - (btn.labelLeft - 10),
+                  top: 4,
+                  width: btn.label === '待支付' ? 34 : 30,
+                  height: 34,
+                  display: 'block',
+                }}
+              />
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 10,
+                  top: 42,
+                  width: btn.labelWidth,
+                  height: 18,
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 13,
+                  fontWeight: 500,
+                  lineHeight: '18px',
+                  color: '#262626',
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {btn.label}
+              </span>
+            </button>
+          ))}
+
+          {/* 常用工具卡片 (0:55192) */}
+          <div
+            style={{
+              position: 'absolute',
+              left: 12,
+              top: 174,
+              width: 351,
+              height: 248,
+              borderRadius: 8,
+              backgroundColor: '#ffffff',
             }}
           />
           <span
             style={{
               position: 'absolute',
-              left: 10,
-              top: 42,
-              width: btn.labelWidth,
-              height: 18,
+              left: 22,
+              top: 190,
+              width: 64,
+              height: 22,
               fontFamily: 'var(--font-sans)',
-              fontSize: 13,
+              fontSize: 16,
               fontWeight: 500,
-              lineHeight: '18px',
-              color: '#262626',
-              textAlign: 'center',
-              whiteSpace: 'nowrap',
+              lineHeight: '22px',
+              color: '#333333',
             }}
           >
-            {btn.label}
+            常用工具
           </span>
-        </button>
-      ))}
 
-      {/* 常用工具卡片 (0:55192) */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 12,
-          top: 234,
-          width: 351,
-          height: 248,
-          borderRadius: 8,
-          backgroundColor: '#ffffff',
-        }}
-      />
-      <span
-        style={{
-          position: 'absolute',
-          left: 22,
-          top: 250,
-          width: 64,
-          height: 22,
-          fontFamily: 'var(--font-sans)',
-          fontSize: 16,
-          fontWeight: 500,
-          lineHeight: '22px',
-          color: '#333333',
-        }}
-      >
-        常用工具
-      </span>
-
-      {/* 商城入口（PAGE_RELATIONSHIPS.md 约定：我的 → 常用工具 → 商城） */}
-      <button
-        type="button"
-        onClick={() => navigate('mall')}
-        style={{
-          position: 'absolute',
-          left: 295,
-          top: 252,
-          height: 18,
-          background: 'transparent',
-          border: 'none',
-          padding: 0,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 3,
-          cursor: 'pointer',
-          color: '#1478ff',
-          fontSize: 12,
-        }}
-      >
-        <span>健康商城</span>
-        <svg width="5" height="9" viewBox="0 0 5 9" fill="none">
-          <path d="M1 1L4 4.5L1 8" stroke="#1478ff" strokeWidth="1.2" strokeLinecap="round" />
-        </svg>
-      </button>
-
-      {tools.map((tool) => (
-        <button
-          key={tool.label}
-          type="button"
-          onClick={tool.onClick}
-          style={{
-            position: 'absolute',
-            left: tool.labelLeft - 10,
-            top: tool.iconTop - 4,
-            width: 72,
-            height: 60,
-            background: 'transparent',
-            border: 'none',
-            padding: 0,
-            cursor: 'pointer',
-          }}
-        >
-          <img
-            src={tool.icon}
-            alt={tool.label}
+          {/* 商城入口（PAGE_RELATIONSHIPS.md 约定：我的 → 常用工具 → 商城） */}
+          <button
+            type="button"
+            onClick={() => navigate('mall')}
             style={{
               position: 'absolute',
-              left: tool.iconLeft - (tool.labelLeft - 10),
-              top: 4,
-              width: 28,
-              height: 28,
-              display: 'block',
-            }}
-          />
-          <span
-            style={{
-              position: 'absolute',
-              left: 10,
-              top: tool.labelTop - (tool.iconTop - 4),
-              width: 52,
+              left: 295,
+              top: 192,
               height: 18,
-              fontFamily: 'var(--font-sans)',
-              fontSize: 13,
-              fontWeight: 400,
-              lineHeight: '18px',
-              color: '#333333',
-              textAlign: 'center',
-              whiteSpace: 'nowrap',
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 3,
+              cursor: 'pointer',
+              color: '#1478ff',
+              fontSize: 12,
             }}
           >
-            {tool.label}
-          </span>
-        </button>
-      ))}
+            <span>健康商城</span>
+            <svg width="5" height="9" viewBox="0 0 5 9" fill="none">
+              <path d="M1 1L4 4.5L1 8" stroke="#1478ff" strokeWidth="1.2" strokeLinecap="round" />
+            </svg>
+          </button>
 
-      {/* 底部功能列表卡片 (设置 / 帮助与反馈 / 联系客服 / 客服电话) */}
-      <div
-        style={{
-          position: 'absolute',
-          left: 12,
-          top: 494,
-          width: 351,
-          height: 218,
-          borderRadius: 8,
-          backgroundColor: '#ffffff',
-        }}
-      />
-      {[
-        {
-          label: '设置',
-          icon: '/assets/extracted/mine-row-settings.png',
-          top: 500,
-          textTop: 513,
-          iconTop: 510,
-          arrow: true,
-          onClick: () => navigate('settings'),
-        },
-        {
-          label: '帮助与反馈',
-          icon: '/assets/extracted/mine-row-help.png',
-          top: 551,
-          textTop: 564,
-          iconTop: 561,
-          arrow: true,
-          onClick: () => navigate('help-feedback'),
-        },
-        {
-          label: '联系客服',
-          icon: '/assets/extracted/mine-row-service.png',
-          top: 602,
-          textTop: 615,
-          iconTop: 612,
-          arrow: true,
-          onClick: () => setServiceModal('online'),
-        },
-      ].map((row) => (
-        <button
-          key={row.label}
-          type="button"
-          onClick={row.onClick}
-          style={{
-            position: 'absolute',
-            left: 12,
-            top: row.top,
-            width: 351,
-            height: 46,
-            background: 'transparent',
-            border: 'none',
-            padding: 0,
-            cursor: 'pointer',
-            textAlign: 'left',
-          }}
-        >
-          <img
-            src={row.icon}
-            alt=""
+          {tools.map((tool) => (
+            <button
+              key={tool.label}
+              type="button"
+              onClick={tool.onClick}
+              style={{
+                position: 'absolute',
+                left: tool.labelLeft - 10,
+                top: tool.iconTop - 4 - 60,
+                width: 72,
+                height: 60,
+                background: 'transparent',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+              }}
+            >
+              <img
+                src={tool.icon}
+                alt={tool.label}
+                style={{
+                  position: 'absolute',
+                  left: tool.iconLeft - (tool.labelLeft - 10),
+                  top: 4,
+                  width: 28,
+                  height: 28,
+                  display: 'block',
+                }}
+              />
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 10,
+                  top: tool.labelTop - (tool.iconTop - 4),
+                  width: 52,
+                  height: 18,
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 13,
+                  fontWeight: 400,
+                  lineHeight: '18px',
+                  color: '#333333',
+                  textAlign: 'center',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {tool.label}
+              </span>
+            </button>
+          ))}
+
+          {/* 底部功能列表卡片 (设置 / 帮助与反馈 / 联系客服 / 客服电话) */}
+          <div
             style={{
               position: 'absolute',
-              left: 16,
-              top: row.iconTop - row.top,
-              width: 24,
-              height: 24,
-              display: 'block',
+              left: 12,
+              top: 434,
+              width: 351,
+              height: 218,
+              borderRadius: 8,
+              backgroundColor: '#ffffff',
             }}
           />
-          <span
+          {[
+            {
+              label: '设置',
+              icon: '/assets/extracted/mine-row-settings.png',
+              top: 500,
+              textTop: 513,
+              iconTop: 510,
+              arrow: true,
+              onClick: () => navigate('settings'),
+            },
+            {
+              label: '帮助与反馈',
+              icon: '/assets/extracted/mine-row-help.png',
+              top: 551,
+              textTop: 564,
+              iconTop: 561,
+              arrow: true,
+              onClick: () => navigate('help-feedback'),
+            },
+            {
+              label: '联系客服',
+              icon: '/assets/extracted/mine-row-service.png',
+              top: 602,
+              textTop: 615,
+              iconTop: 612,
+              arrow: true,
+              onClick: () => setServiceModal('online'),
+            },
+          ].map((row) => (
+            <button
+              key={row.label}
+              type="button"
+              onClick={row.onClick}
+              style={{
+                position: 'absolute',
+                left: 12,
+                top: row.top - 60,
+                width: 351,
+                height: 46,
+                background: 'transparent',
+                border: 'none',
+                padding: 0,
+                cursor: 'pointer',
+                textAlign: 'left',
+              }}
+            >
+              <img
+                src={row.icon}
+                alt=""
+                style={{
+                  position: 'absolute',
+                  left: 16,
+                  top: row.iconTop - row.top,
+                  width: 24,
+                  height: 24,
+                  display: 'block',
+                }}
+              />
+              <span
+                style={{
+                  position: 'absolute',
+                  left: 44,
+                  top: row.textTop - row.top,
+                  fontFamily: 'var(--font-sans)',
+                  fontSize: 13,
+                  fontWeight: 400,
+                  lineHeight: '18px',
+                  color: '#333333',
+                }}
+              >
+                {row.label}
+              </span>
+              <svg
+                width="6"
+                height="11"
+                viewBox="0 0 6 11"
+                fill="none"
+                style={{ position: 'absolute', left: 324, top: row.textTop - row.top + 3.5 }}
+              >
+                <path d="M1 1L5 5.5L1 10" stroke="#999999" strokeWidth="1.2" strokeLinecap="round" />
+              </svg>
+            </button>
+          ))}
+
+          {/* 客服电话行 */}
+          <button
+            type="button"
+            onClick={() => setServiceModal('phone')}
             style={{
               position: 'absolute',
-              left: 44,
-              top: row.textTop - row.top,
-              fontFamily: 'var(--font-sans)',
-              fontSize: 13,
-              fontWeight: 400,
-              lineHeight: '18px',
-              color: '#333333',
+              left: 12,
+              top: 590,
+              width: 351,
+              height: 52,
+              background: 'transparent',
+              border: 'none',
+              padding: 0,
+              cursor: 'pointer',
+              textAlign: 'left',
             }}
           >
-            {row.label}
-          </span>
-          <svg
-            width="6"
-            height="11"
-            viewBox="0 0 6 11"
-            fill="none"
-            style={{ position: 'absolute', left: 324, top: row.textTop - row.top + 3.5 }}
-          >
-            <path d="M1 1L5 5.5L1 10" stroke="#999999" strokeWidth="1.2" strokeLinecap="round" />
-          </svg>
-        </button>
-      ))}
-
-      {/* 客服电话行 */}
-      <button
-        type="button"
-        onClick={() => setServiceModal('phone')}
-        style={{
-          position: 'absolute',
-          left: 12,
-          top: 650,
-          width: 351,
-          height: 52,
-          background: 'transparent',
-          border: 'none',
-          padding: 0,
-          cursor: 'pointer',
-          textAlign: 'left',
-        }}
-      >
-        <img
-          src="/assets/extracted/mine-row-phone.png"
-          alt=""
-          style={{ position: 'absolute', left: 16, top: 11, width: 24, height: 24, display: 'block' }}
-        />
-        <span
-          style={{
-            position: 'absolute',
-            left: 44,
-            top: 9,
-            fontFamily: 'var(--font-sans)',
-            fontSize: 13,
-            fontWeight: 400,
-            lineHeight: '18px',
-            color: '#333333',
-          }}
-        >
-          客服电话
-        </span>
-        <span
-          style={{
-            position: 'absolute',
-            left: 101,
-            top: 9,
-            fontFamily: 'var(--font-sans)',
-            fontSize: 13,
-            fontWeight: 400,
-            lineHeight: '18px',
-            color: '#333333',
-          }}
-        >
-          010-88248999
-        </span>
-        <span
-          style={{
-            position: 'absolute',
-            left: 45,
-            top: 27,
-            fontFamily: 'var(--font-sans)',
-            fontSize: 10,
-            fontWeight: 400,
-            lineHeight: '14px',
-            color: '#999999',
-          }}
-        >
-          周一至周五8:00-22:00在线
-        </span>
-      </button>
-
-      <BottomTabBar top={729} offsetX={1} />
+            <img
+              src="/assets/extracted/mine-row-phone.png"
+              alt=""
+              style={{ position: 'absolute', left: 16, top: 11, width: 24, height: 24, display: 'block' }}
+            />
+            <span
+              style={{
+                position: 'absolute',
+                left: 44,
+                top: 9,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 13,
+                fontWeight: 400,
+                lineHeight: '18px',
+                color: '#333333',
+              }}
+            >
+              客服电话
+            </span>
+            <span
+              style={{
+                position: 'absolute',
+                left: 101,
+                top: 9,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 13,
+                fontWeight: 400,
+                lineHeight: '18px',
+                color: '#333333',
+              }}
+            >
+              010-88248999
+            </span>
+            <span
+              style={{
+                position: 'absolute',
+                left: 45,
+                top: 27,
+                fontFamily: 'var(--font-sans)',
+                fontSize: 10,
+                fontWeight: 400,
+                lineHeight: '14px',
+                color: '#999999',
+              }}
+            >
+              周一至周五8:00-22:00在线
+            </span>
+          </button>
+        </div>
+      </div>
 
       {/* 客服弹层 */}
       {serviceModal !== 'none' && (
@@ -569,7 +574,7 @@ export function MinePage() {
             position: 'fixed',
             inset: 0,
             backgroundColor: 'rgba(0,0,0,0.45)',
-            zIndex: 100,
+            zIndex: 200,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

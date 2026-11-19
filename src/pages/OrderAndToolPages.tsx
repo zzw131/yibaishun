@@ -47,9 +47,9 @@ export function OrdersPage() {
   return (
     <div
       data-frame-id="0:54446"
-      className="relative w-[375px] min-h-[667px] bg-[#f6f6f6] pb-[30px]"
+      className="page-shell bg-[#f6f6f6]"
     >
-      <div className="bg-white">
+      <div className="page-top bg-white">
         <NavBar title="订单列表" onBack={goBack} />
         {/* 5状态Tab (y=64..102) */}
         <div className="h-[38px] flex items-center justify-around px-[8px] bg-white">
@@ -78,8 +78,6 @@ export function OrdersPage() {
             )
           })}
         </div>
-      </div>
-
       {/* 开发票提示条 (y=102, h=29) */}
       <button
         type="button"
@@ -97,7 +95,9 @@ export function OrdersPage() {
           />
         </svg>
       </button>
+      </div>
 
+      <div className="page-scroll">
       {/* 订单卡片列表 */}
       {filteredOrders.length === 0 ? (
         <div
@@ -112,7 +112,7 @@ export function OrdersPage() {
           <p className="mt-[8px] text-[#999999] text-[14px]">暂无相关订单数据</p>
         </div>
       ) : (
-        <div className="px-[10px] pt-[10px] space-y-[10px]">
+        <div className="px-[10px] pt-[10px] pb-[20px] space-y-[10px]">
           {filteredOrders.map((order) => (
             <div
               key={order.id}
@@ -239,6 +239,7 @@ export function OrdersPage() {
           ))}
         </div>
       )}
+      </div>
 
       {/* 取消订单原因弹窗 (0:8615 -> 0:9794) */}
       {cancellingOrderId && (
@@ -325,10 +326,11 @@ export function OrderDetailPage() {
   return (
     <div
       data-frame-id="0:9090"
-      className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]"
+      className="page-shell bg-[#f5f6f8]"
     >
       <NavBar title="订单详情" onBack={goBack} />
 
+      <div className="page-scroll pb-[16px]">
       {/* 顶部状态横幅 */}
       <div className="bg-gradient-to-r from-[#2b9aff] to-[#1890ff] px-[18px] py-[18px] text-white">
         <div className="text-[17px] font-medium">{order.status}</div>
@@ -423,8 +425,10 @@ export function OrderDetailPage() {
         </div>
       )}
 
+      </div>
+
       {/* 底部操作栏 */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-end gap-[10px]">
+      <div className="page-bottom-bar h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-end gap-[10px]">
         {order.status === '待付款' && (
           <button
             type="button"
@@ -476,9 +480,10 @@ export function PaymentPage() {
   const [payMethod, setPayMethod] = useState<'wechat' | 'medical'>('wechat')
 
   return (
-    <div data-frame-id="0:45709" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:45709" className="page-shell bg-[#f5f6f8]">
       <NavBar title="收银台" onBack={goBack} />
 
+      <div className="page-scroll">
       <div className="bg-white py-[28px] flex flex-col items-center border-b border-[#f0f0f0]">
         <span className="text-[#888888] text-[13px]">支付剩余时间 29:48</span>
         <div className="mt-[8px] text-[#333333] text-[28px] font-semibold">
@@ -547,6 +552,7 @@ export function PaymentPage() {
           确认支付 ¥{order.amount.toFixed(2)}
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -560,9 +566,10 @@ export function PaymentResultPage() {
   const order = orders.find((o) => o.id === orderId) || orders[0]
 
   return (
-    <div data-frame-id="0:45942" className="relative w-[375px] min-h-[667px] bg-white">
+    <div data-frame-id="0:45942" className="page-shell bg-white">
       <NavBar title="支付结果" onBack={() => navigate('orders')} />
 
+      <div className="page-scroll">
       <div className="pt-[46px] px-[24px] flex flex-col items-center">
         <div className="w-[64px] h-[64px] rounded-full bg-[#1890ff] text-white text-[32px] flex items-center justify-center">
           ✓
@@ -595,6 +602,7 @@ export function PaymentResultPage() {
           </button>
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -609,8 +617,9 @@ export function OrderRefundPage() {
   const [reason, setReason] = useState('药品包装破损 / 处方调整')
 
   return (
-    <div data-frame-id="0:9829" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:9829" className="page-shell bg-[#f5f6f8]">
       <NavBar title="申请售后退款" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[14px] space-y-[10px]">
         <div className="text-[#333333] text-[14px] font-medium">
           退款商品：{order.category}（{order.hospital}）
@@ -638,6 +647,7 @@ export function OrderRefundPage() {
           提交退款申请
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -648,8 +658,9 @@ export function RefundDetailPage() {
   const order = orders.find((o) => o.id === orderId) || orders[0]
 
   return (
-    <div data-frame-id="0:9939" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:9939" className="page-shell bg-[#f5f6f8]">
       <NavBar title="退款详情" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white p-[16px] m-[10px] rounded-[8px] space-y-[8px] text-[13px]">
         <div className="text-[#1890ff] text-[16px] font-semibold">
           售后状态：{order.refundStatus || '申请中'}
@@ -661,6 +672,7 @@ export function RefundDetailPage() {
         <div className="text-[#888888] text-[12px]">
           药师与医院财务审核通过后，款项将原路退回您的支付账户。
         </div>
+      </div>
       </div>
     </div>
   )
@@ -676,11 +688,12 @@ export function PrescriptionPage() {
   const [statusMode, setStatusMode] = useState<'valid' | 'expired' | 'offline-only'>(rx.status)
 
   return (
-    <div data-frame-id="0:7317" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]">
-      <NavBar title="电子处方" onBack={goBack} />
+    <div data-frame-id="0:7317" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar title="电子处方" onBack={goBack} />
 
-      {/* 状态切换演示栏（支持核验 0:7317 / 0:15876 / 0:13420 三态） */}
-      <div className="bg-[#ebf6ff] px-[12px] py-[6px] flex items-center justify-between text-[12px]">
+        {/* 状态切换演示栏（支持核验 0:7317 / 0:15876 / 0:13420 三态） */}
+        <div className="bg-[#ebf6ff] px-[12px] py-[6px] flex items-center justify-between text-[12px]">
         <span className="text-[#1890ff]">处方状态切换：</span>
         <div className="flex gap-[6px]">
           {[
@@ -702,8 +715,10 @@ export function PrescriptionPage() {
             </button>
           ))}
         </div>
+        </div>
       </div>
 
+      <div className="page-scroll">
       {/* 处方笺纸张主体 */}
       <div className="m-[12px] bg-white rounded-[8px] p-[16px] relative shadow-sm">
         {statusMode === 'expired' && (
@@ -754,9 +769,10 @@ export function PrescriptionPage() {
           <div>审核药师：{rx.pharmacistName}</div>
         </div>
       </div>
+      </div>
 
       {/* 底部购药栏 */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] h-[56px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
+      <div className="page-bottom-bar h-[56px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
         <div>
           <span className="text-[#666666] text-[12px]">处方药费合计：</span>
           <span className="text-[#ff4d4f] text-[16px] font-semibold">
@@ -801,11 +817,12 @@ export function DrugCheckoutPage() {
   const defaultAddr = addresses.find((a) => a.isDefault) || addresses[0]
 
   return (
-    <div data-frame-id="0:13581" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]">
-      <NavBar title="购买药品" onBack={goBack} />
+    <div data-frame-id="0:13581" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar title="购买药品" onBack={goBack} />
 
-      {/* 购药方式切换 */}
-      <div className="bg-white p-[12px] flex gap-[8px]">
+        {/* 购药方式切换 */}
+        <div className="bg-white p-[12px] flex gap-[8px] border-b border-[#f0f0f0]">
         {(['配送到家', '到院自取', '外配处方'] as const).map((mode) => (
           <button
             key={mode}
@@ -820,8 +837,10 @@ export function DrugCheckoutPage() {
             {mode}
           </button>
         ))}
+        </div>
       </div>
 
+      <div className="page-scroll">
       {/* 收货地址 */}
       {deliveryMode === '配送到家' && (
         <div
@@ -865,9 +884,10 @@ export function DrugCheckoutPage() {
           </div>
         ))}
       </div>
+      </div>
 
       {/* 底部提交订单 */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
+      <div className="page-bottom-bar h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
         <div>
           <span className="text-[#666666] text-[12px]">应付金额：</span>
           <span className="text-[#ff4d4f] text-[17px] font-semibold">
@@ -901,8 +921,9 @@ export function DrugCheckoutPage() {
 export function AddressListPage() {
   const { addresses, navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:45640" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]">
+    <div data-frame-id="0:45640" className="page-shell bg-[#f5f6f8]">
       <NavBar title="收货地址管理" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {addresses.map((addr) => (
           <div
@@ -933,7 +954,8 @@ export function AddressListPage() {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] p-[12px] bg-white border-t border-[#eeeeee]">
+      </div>
+      <div className="page-bottom-bar p-[12px] bg-white border-t border-[#eeeeee]">
         <button
           type="button"
           onClick={() => navigate('address-edit')}
@@ -957,8 +979,9 @@ export function AddressEditPage() {
   const [isDefault, setIsDefault] = useState(existing?.isDefault ?? true)
 
   return (
-    <div data-frame-id="0:7169" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:7169" className="page-shell bg-[#f5f6f8]">
       <NavBar title={existing ? '编辑收货地址' : '新增收货地址'} onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] px-[15px] divide-y divide-[#f2f2f2] text-[14px]">
         <div className="py-[12px] flex items-center">
           <span className="w-[80px] text-[#666666]">收货人</span>
@@ -1023,6 +1046,7 @@ export function AddressEditPage() {
           保存地址
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1035,8 +1059,9 @@ export function LogisticsPage() {
     { time: '2022-02-24 11:00', title: '已揽收', desc: '顺丰速运已从【安徽医科大学第一附属医院智慧药房】揽收' },
   ]
   return (
-    <div data-frame-id="0:16116" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:16116" className="page-shell bg-[#f5f6f8]">
       <NavBar title="物流详情" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[14px]">
         <div className="text-[#333333] text-[14px] font-medium">顺丰速运：SF1389201928371</div>
         <div className="mt-[14px] space-y-[16px] border-l-2 border-[#1890ff] ml-[8px] pl-[14px]">
@@ -1049,6 +1074,7 @@ export function LogisticsPage() {
             </div>
           ))}
         </div>
+      </div>
       </div>
     </div>
   )
@@ -1063,11 +1089,12 @@ export function MallPage() {
   const [showHospitalPicker, setShowHospitalPicker] = useState(false)
 
   return (
-    <div data-frame-id="0:56181" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[70px]">
-      <NavBar title="健康商城" onBack={goBack} />
+    <div data-frame-id="0:56181" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar title="健康商城" onBack={goBack} />
 
-      {/* 顶部医院切换与购物车入口 */}
-      <div className="bg-white px-[15px] py-[10px] flex items-center justify-between border-b border-[#f0f0f0]">
+        {/* 顶部医院切换与购物车入口 */}
+        <div className="bg-white px-[15px] py-[10px] flex items-center justify-between border-b border-[#f0f0f0]">
         <button
           type="button"
           onClick={() => setShowHospitalPicker(!showHospitalPicker)}
@@ -1083,9 +1110,11 @@ export function MallPage() {
         >
           购物车 ({cart.reduce((s, c) => s + c.quantity, 0)})
         </button>
+        </div>
       </div>
 
       {/* 商品列表 */}
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {mallProducts.map((prod) => (
           <div
@@ -1121,6 +1150,7 @@ export function MallPage() {
             </div>
           </div>
         ))}
+      </div>
       </div>
 
       {/* 医院选择弹窗 (0:57264) */}
@@ -1166,8 +1196,9 @@ export function MallDetailPage() {
   const [selectedSpec, setSelectedSpec] = useState(prod.specs[0])
 
   return (
-    <div data-frame-id="0:56715" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[70px]">
+    <div data-frame-id="0:56715" className="page-shell bg-[#f5f6f8]">
       <NavBar title="商品详情" onBack={goBack} />
+      <div className="page-scroll pb-[14px]">
       <img src={prod.cover} alt={prod.name} className="w-[375px] h-[220px] object-cover bg-white" />
       <div className="bg-white p-[15px]">
         <div className="flex items-baseline gap-[8px]">
@@ -1200,9 +1231,10 @@ export function MallDetailPage() {
           ))}
         </div>
       </div>
+      </div>
 
       {/* 底部操作栏 */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center gap-[10px]">
+      <div className="page-bottom-bar h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center gap-[10px]">
         <button
           type="button"
           onClick={() => navigate('cart')}
@@ -1253,7 +1285,7 @@ export function CartPage() {
     .reduce((acc, cur) => acc + cur.price * cur.quantity, 0)
 
   return (
-    <div data-frame-id="0:56290" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[70px]">
+    <div data-frame-id="0:56290" className="page-shell bg-[#f5f6f8]">
       <NavBar
         title="购物车"
         onBack={goBack}
@@ -1261,6 +1293,7 @@ export function CartPage() {
         onRightClick={() => setEditMode(!editMode)}
       />
 
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {cart.map((item) => (
           <div
@@ -1295,9 +1328,10 @@ export function CartPage() {
           </div>
         ))}
       </div>
+      </div>
 
       {/* 底部结算栏 */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
+      <div className="page-bottom-bar h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
         <button
           type="button"
           onClick={() => toggleAllCart(!allChecked)}
@@ -1364,7 +1398,7 @@ export function InvoiceSelectPage() {
   }
 
   return (
-    <div data-frame-id="0:54695" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[70px]">
+    <div data-frame-id="0:54695" className="page-shell bg-[#f5f6f8]">
       <NavBar
         title="开发票"
         onBack={goBack}
@@ -1372,6 +1406,7 @@ export function InvoiceSelectPage() {
         onRightClick={() => navigate('my-invoices')}
       />
 
+      <div className="page-scroll">
       {eligibleOrders.length === 0 ? (
         <div className="pt-[100px] flex flex-col items-center">
           <img
@@ -1412,8 +1447,9 @@ export function InvoiceSelectPage() {
           })}
         </div>
       )}
+      </div>
 
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
+      <div className="page-bottom-bar h-[54px] bg-white border-t border-[#eeeeee] px-[15px] flex items-center justify-between">
         <span className="text-[#666666] text-[13px]">已选 {selectedIds.length} 个订单</span>
         <button
           type="button"
@@ -1434,8 +1470,9 @@ export function InvoiceSubmitPage() {
   const [email, setEmail] = useState('zhangxiaojing@example.com')
 
   return (
-    <div data-frame-id="0:54888" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:54888" className="page-shell bg-[#f5f6f8]">
       <NavBar title="开具电子发票" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] px-[15px] divide-y divide-[#f2f2f2] text-[14px]">
         <div className="py-[12px] flex justify-between">
           <span className="text-[#666666]">抬头类型</span>
@@ -1470,6 +1507,7 @@ export function InvoiceSubmitPage() {
           提交开票申请
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1477,8 +1515,9 @@ export function InvoiceSubmitPage() {
 export function MyInvoicesPage() {
   const { invoices, navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:54563" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:54563" className="page-shell bg-[#f5f6f8]">
       <NavBar title="我的发票" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {invoices.map((inv) => (
           <div
@@ -1499,6 +1538,7 @@ export function MyInvoicesPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -1509,8 +1549,9 @@ export function InvoiceDetailPage() {
   const inv = invoices.find((i) => i.id === invId) || invoices[0]
 
   return (
-    <div data-frame-id="0:54655" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:54655" className="page-shell bg-[#f5f6f8]">
       <NavBar title="发票详情" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[16px] space-y-[10px] text-[13px]">
         <div className="text-[#1890ff] text-[15px] font-semibold">{inv.status}</div>
         <div className="flex justify-between">
@@ -1530,6 +1571,7 @@ export function InvoiceDetailPage() {
           <span className="text-[#333333]">{inv.date}</span>
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -1544,9 +1586,10 @@ export function MessagesPage() {
   )
 
   return (
-    <div data-frame-id="0:1559" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
-      <NavBar title="消息中心" onBack={goBack} />
-      <div className="bg-white h-[42px] flex border-b border-[#f0f0f0]">
+    <div data-frame-id="0:1559" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar title="消息中心" onBack={goBack} />
+        <div className="bg-white h-[42px] flex border-b border-[#f0f0f0]">
         <button
           type="button"
           onClick={() => setTab('system')}
@@ -1565,8 +1608,10 @@ export function MessagesPage() {
         >
           订单消息
         </button>
+        </div>
       </div>
 
+      <div className="page-scroll">
       {tab === 'system' ? (
         <div className="p-[10px] space-y-[10px]">
           <div className="bg-white rounded-[8px] p-[14px]">
@@ -1610,6 +1655,7 @@ export function MessagesPage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   )
 }
@@ -1622,8 +1668,9 @@ export function MyDoctorsPage() {
   const followedDocs = doctors.filter((d) => d.followed)
 
   return (
-    <div data-frame-id="0:9185" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:9185" className="page-shell bg-[#f5f6f8]">
       <NavBar title="我的医生" onBack={goBack} />
+      <div className="page-scroll">
       {followedDocs.length === 0 ? (
         <div className="pt-[100px] flex flex-col items-center">
           <img
@@ -1669,6 +1716,7 @@ export function MyDoctorsPage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   )
 }
@@ -1680,9 +1728,10 @@ export function MyFavoritesPage() {
   const favArticles = articles.filter((a) => a.favorited)
 
   return (
-    <div data-frame-id="0:9349" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
-      <NavBar title="我的收藏" onBack={goBack} />
-      <div className="bg-white h-[40px] flex border-b border-[#f0f0f0]">
+    <div data-frame-id="0:9349" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar title="我的收藏" onBack={goBack} />
+        <div className="bg-white h-[40px] flex border-b border-[#f0f0f0]">
         <button
           type="button"
           onClick={() => setTab('video')}
@@ -1701,8 +1750,10 @@ export function MyFavoritesPage() {
         >
           科普文章 ({favArticles.length})
         </button>
+        </div>
       </div>
 
+      <div className="page-scroll">
       {tab === 'video' ? (
         <div className="p-[10px] grid grid-cols-2 gap-[10px]">
           {favVideos.map((v) => (
@@ -1741,6 +1792,7 @@ export function MyFavoritesPage() {
           ))}
         </div>
       )}
+      </div>
     </div>
   )
 }
@@ -1748,8 +1800,9 @@ export function MyFavoritesPage() {
 export function MyFamilyPage() {
   const { patients, navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:10846" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]">
+    <div data-frame-id="0:10846" className="page-shell bg-[#f5f6f8]">
       <NavBar title="我的家人" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {patients.map((pat) => (
           <div
@@ -1773,7 +1826,8 @@ export function MyFamilyPage() {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] p-[12px] bg-white border-t border-[#eeeeee]">
+      </div>
+      <div className="page-bottom-bar p-[12px] bg-white border-t border-[#eeeeee]">
         <button
           type="button"
           onClick={() => navigate('patient-edit')}
@@ -1789,8 +1843,9 @@ export function MyFamilyPage() {
 export function MedicalRecordsPage() {
   const { medicalCases, navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:23739" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]">
+    <div data-frame-id="0:23739" className="page-shell bg-[#f5f6f8]">
       <NavBar title="病历档案" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {medicalCases.map((c) => (
           <div key={c.id} className="bg-white rounded-[8px] p-[14px] space-y-[6px]">
@@ -1810,7 +1865,8 @@ export function MedicalRecordsPage() {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] p-[12px] bg-white border-t border-[#eeeeee]">
+      </div>
+      <div className="page-bottom-bar p-[12px] bg-white border-t border-[#eeeeee]">
         <button
           type="button"
           onClick={() => navigate('medical-record-add')}
@@ -1832,8 +1888,9 @@ export function MedicalRecordAddPage() {
   const [notes, setNotes] = useState('完成脉冲激光巩固治疗一次，恢复良好。')
 
   return (
-    <div data-frame-id="0:22121" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:22121" className="page-shell bg-[#f5f6f8]">
       <NavBar title="上传病历档案" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] px-[15px] divide-y divide-[#f2f2f2] text-[14px]">
         <div className="py-[12px] flex items-center">
           <span className="w-[85px] text-[#666666]">就诊人</span>
@@ -1896,6 +1953,7 @@ export function MedicalRecordAddPage() {
           保存病历档案
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1906,8 +1964,9 @@ export function MyCommentsPage() {
     a.comments.map((c) => ({ ...c, articleId: a.id, articleTitle: a.detailTitle })),
   )
   return (
-    <div data-frame-id="0:17308" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:17308" className="page-shell bg-[#f5f6f8]">
       <NavBar title="我的评论" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {allComments.map((c) => (
           <div
@@ -1923,6 +1982,7 @@ export function MyCommentsPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -1931,8 +1991,9 @@ export function MyReviewsPage() {
   const { consultations, navigate, goBack } = useAppStore()
   const reviewedList = consultations.filter((c) => c.type !== 'free')
   return (
-    <div data-frame-id="0:17343" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:17343" className="page-shell bg-[#f5f6f8]">
       <NavBar title="我的评价" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {reviewedList.map((c) => (
           <div key={c.id} className="bg-white rounded-[8px] p-[14px]">
@@ -1958,6 +2019,7 @@ export function MyReviewsPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -1971,11 +2033,12 @@ export function ReportsPage() {
   const patReports = reports.filter((r) => r.patientId === selectedPatId)
 
   return (
-    <div data-frame-id="0:12318" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
-      <NavBar title="报告查询" onBack={goBack} />
+    <div data-frame-id="0:12318" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar title="报告查询" onBack={goBack} />
 
-      {/* 就诊人切换栏 */}
-      <div className="bg-white px-[15px] py-[10px] flex gap-[8px] border-b border-[#f0f0f0]">
+        {/* 就诊人切换栏 */}
+        <div className="bg-white px-[15px] py-[10px] flex gap-[8px] border-b border-[#f0f0f0]">
         {patients.map((p) => (
           <button
             key={p.id}
@@ -1990,8 +2053,10 @@ export function ReportsPage() {
             {p.name}
           </button>
         ))}
+        </div>
       </div>
 
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {patReports.map((rep) => (
           <div
@@ -2014,6 +2079,7 @@ export function ReportsPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -2028,8 +2094,9 @@ export function ReportSheetPage() {
   const rep = reports.find((r) => r.id === repId) || reports[0]
 
   return (
-    <div data-frame-id="0:7400" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:7400" className="page-shell bg-[#f5f6f8]">
       <NavBar title={rep.type} onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[15px]">
         <div className="text-center border-b border-[#f0f0f0] pb-[10px]">
           <div className="text-[#333333] text-[16px] font-semibold">{rep.hospital}</div>
@@ -2060,6 +2127,7 @@ export function ReportSheetPage() {
           ))}
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -2076,15 +2144,16 @@ export function NucleicAcidPage() {
   const pat = patients[0]
 
   return (
-    <div data-frame-id="0:12966" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
-      <NavBar
-        title="核酸检测预约"
-        onBack={goBack}
-        rightText="查报告"
-        onRightClick={() => navigate('nucleic-query')}
-      />
+    <div data-frame-id="0:12966" className="page-shell bg-[#f5f6f8]">
+      <div className="page-top bg-white">
+        <NavBar
+          title="核酸检测预约"
+          onBack={goBack}
+          rightText="查报告"
+          onRightClick={() => navigate('nucleic-query')}
+        />
 
-      <div className="bg-[#ebf6ff] px-[12px] py-[6px] flex items-center justify-between text-[12px]">
+        <div className="bg-[#ebf6ff] px-[12px] py-[6px] flex items-center justify-between text-[12px]">
         <span className="text-[#1890ff]">通道状态演示：</span>
         <button
           type="button"
@@ -2093,8 +2162,10 @@ export function NucleicAcidPage() {
         >
           {expiredChannel ? '切换为正常可预约(0:12966)' : '切换为通道已过期(0:12543)'}
         </button>
+        </div>
       </div>
 
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[14px] space-y-[12px] text-[14px]">
         <div
           onClick={() => navigate('nucleic-hospitals')}
@@ -2148,6 +2219,7 @@ export function NucleicAcidPage() {
           </button>
         )}
       </div>
+      </div>
     </div>
   )
 }
@@ -2156,8 +2228,9 @@ export function NucleicQueryPage() {
   const { reports, navigate, goBack } = useAppStore()
   const nucleicRep = reports.find((r) => r.type === '核酸报告') || reports[0]
   return (
-    <div data-frame-id="0:11624" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:11624" className="page-shell bg-[#f5f6f8]">
       <NavBar title="核酸检测结果查询" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px]">
         <div
           onClick={() => navigate('report-sheet', { reportId: nucleicRep.id })}
@@ -2175,6 +2248,7 @@ export function NucleicQueryPage() {
           <div className="text-[#999999] text-[12px] mt-[4px]">报告时间：{nucleicRep.date}</div>
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -2183,8 +2257,9 @@ export function NucleicHospitalsPage() {
   const { goBack } = useAppStore()
   const list = ['北京长峰医院核酸采样点', '安徽医科大学第一附属医院采样点', '上海长峰医院采样点']
   return (
-    <div data-frame-id="0:12469" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:12469" className="page-shell bg-[#f5f6f8]">
       <NavBar title="选择核酸检测医院" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[10px] space-y-[10px]">
         {list.map((h) => (
           <div
@@ -2197,6 +2272,7 @@ export function NucleicHospitalsPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -2207,13 +2283,14 @@ export function NucleicHospitalsPage() {
 export function MedHelperPage() {
   const { medications, toggleMedicationReminder, navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:20963" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8] pb-[80px]">
+    <div data-frame-id="0:20963" className="page-shell bg-[#f5f6f8]">
       <NavBar
         title="用药助手"
         onBack={goBack}
         rightText="提醒预览"
         onRightClick={() => navigate('med-remind')}
       />
+      <div className="page-scroll">
       <div className="bg-gradient-to-r from-[#2b9aff] to-[#1890ff] p-[16px] text-white">
         <div className="text-[16px] font-semibold">今日服药计划</div>
         <div className="text-[12px] text-white/85 mt-[4px]">
@@ -2249,8 +2326,9 @@ export function MedHelperPage() {
           </div>
         ))}
       </div>
+      </div>
 
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-[375px] p-[12px] bg-white border-t border-[#eeeeee] flex gap-[10px]">
+      <div className="page-bottom-bar p-[12px] bg-white border-t border-[#eeeeee] flex gap-[10px]">
         <button
           type="button"
           onClick={() => navigate('med-add')}
@@ -2269,8 +2347,9 @@ export function MedDetailPage() {
   const med = medications.find((m) => m.id === medId) || medications[0]
 
   return (
-    <div data-frame-id="0:21211" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:21211" className="page-shell bg-[#f5f6f8]">
       <NavBar title="用药详情" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[16px] space-y-[10px] text-[14px]">
         <div className="text-[#333333] text-[16px] font-semibold">{med.drugName}</div>
         <div className="text-[#666666]">规格：{med.spec}</div>
@@ -2291,6 +2370,7 @@ export function MedDetailPage() {
           删除该提醒计划
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2303,8 +2383,9 @@ export function MedAddPage() {
   const [frequency, setFrequency] = useState('每日2次')
 
   return (
-    <div data-frame-id="0:20090" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:20090" className="page-shell bg-[#f5f6f8]">
       <NavBar title="添加用药计划" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] px-[15px] divide-y divide-[#f2f2f2] text-[14px]">
         <div className="py-[12px] flex items-center">
           <span className="w-[85px] text-[#666666]">药品名称</span>
@@ -2361,6 +2442,7 @@ export function MedAddPage() {
           保存用药提醒
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2369,7 +2451,7 @@ export function MedRemindPage() {
   const { medications, showToast, goBack } = useAppStore()
   const med = medications[0]
   return (
-    <div data-frame-id="0:20277" className="relative w-[375px] min-h-[667px] bg-[#1890ff] text-white flex flex-col justify-between p-[24px]">
+    <div data-frame-id="0:20277" className="page-shell bg-[#1890ff] text-white flex flex-col justify-between p-[24px]">
       <div className="pt-[40px] text-center">
         <div className="text-[36px] font-bold">08:30</div>
         <div className="mt-[6px] text-[14px] text-white/85">医百顺用药小助手提醒您按时用药</div>
@@ -2426,8 +2508,9 @@ export function SettingsPage() {
     { label: '关于医百顺', page: 'about', extra: 'v2.4.0' },
   ]
   return (
-    <div data-frame-id="0:16957" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:16957" className="page-shell bg-[#f5f6f8]">
       <NavBar title="系统设置" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] divide-y divide-[#f2f2f2]">
         {items.map((item) => (
           <button
@@ -2458,6 +2541,7 @@ export function SettingsPage() {
           退出登录
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2465,8 +2549,9 @@ export function SettingsPage() {
 export function AccountSettingsPage() {
   const { user, navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:10148" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:10148" className="page-shell bg-[#f5f6f8]">
       <NavBar title="个人资料" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] px-[15px] divide-y divide-[#f2f2f2] text-[14px]">
         <div className="py-[12px] flex items-center justify-between">
           <span className="text-[#666666]">头像</span>
@@ -2485,6 +2570,7 @@ export function AccountSettingsPage() {
           <span className="text-[#333333]">{user.phone}</span>
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -2492,8 +2578,9 @@ export function AccountSettingsPage() {
 export function AccountSecurityPage() {
   const { navigate, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:46508" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:46508" className="page-shell bg-[#f5f6f8]">
       <NavBar title="账号与安全" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] divide-y divide-[#f2f2f2]">
         <button
           type="button"
@@ -2512,6 +2599,7 @@ export function AccountSecurityPage() {
           <span className="text-[#999999]">&gt;</span>
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2520,8 +2608,9 @@ export function EditNicknamePage() {
   const { user, updateUserProfile, showToast, goBack } = useAppStore()
   const [name, setName] = useState(user.name)
   return (
-    <div data-frame-id="0:10568" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:10568" className="page-shell bg-[#f5f6f8]">
       <NavBar title="修改昵称" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] p-[15px]">
         <input
           value={name}
@@ -2542,6 +2631,7 @@ export function EditNicknamePage() {
           保存
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2549,8 +2639,9 @@ export function EditNicknamePage() {
 export function RealnameAuthPage() {
   const { user, updateUserProfile, showToast, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:10465" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:10465" className="page-shell bg-[#f5f6f8]">
       <NavBar title="实名认证" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[16px] space-y-[8px] text-[14px]">
         <div className="text-[#1890ff] font-semibold">
           {user.realNameVerified ? '✓ 已通过实名认证' : '请完成实名认证'}
@@ -2570,6 +2661,7 @@ export function RealnameAuthPage() {
           </button>
         )}
       </div>
+      </div>
     </div>
   )
 }
@@ -2577,8 +2669,9 @@ export function RealnameAuthPage() {
 export function ChangePasswordPage() {
   const { showToast, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:17080" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:17080" className="page-shell bg-[#f5f6f8]">
       <NavBar title="修改密码" onBack={goBack} />
+      <div className="page-scroll">
       <div className="bg-white mt-[10px] px-[15px] divide-y divide-[#f2f2f2] text-[14px]">
         <div className="py-[12px]">
           <input type="password" placeholder="请输入原密码" className="w-full border-0 outline-none" />
@@ -2599,6 +2692,7 @@ export function ChangePasswordPage() {
           确认修改
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2606,8 +2700,9 @@ export function ChangePasswordPage() {
 export function DeleteAccountPage() {
   const { showToast, goBack } = useAppStore()
   return (
-    <div data-frame-id="0:17261" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:17261" className="page-shell bg-[#f5f6f8]">
       <NavBar title="注销账号" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[16px] text-[13px] text-[#666666] space-y-[8px]">
         <div className="text-[#ff4d4f] text-[15px] font-semibold">注销账号风险提示</div>
         <p>账号注销后，您的电子处方、问诊记录、家庭就诊人及健康档案将被永久清理且不可恢复。</p>
@@ -2622,6 +2717,7 @@ export function DeleteAccountPage() {
           我再想想
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2629,8 +2725,9 @@ export function DeleteAccountPage() {
 export function AgreementPage() {
   const { goBack } = useAppStore()
   return (
-    <div data-frame-id="0:17287" className="relative w-[375px] min-h-[667px] bg-white">
+    <div data-frame-id="0:17287" className="page-shell bg-white">
       <NavBar title="用户服务与隐私协议" onBack={goBack} />
+      <div className="page-scroll">
       <div className="p-[16px] text-[13px] text-[#444444] leading-[22px] space-y-[10px]">
         <h3 className="text-[15px] font-semibold text-[#222222]">医百顺互联网医院用户服务协议</h3>
         <p>
@@ -2640,6 +2737,7 @@ export function AgreementPage() {
           您的所有个人敏感医疗信息、电子病历及实名认证数据均采用加密存储，仅用于执业医师在线诊疗与处方审核。
         </p>
       </div>
+      </div>
     </div>
   )
 }
@@ -2647,14 +2745,16 @@ export function AgreementPage() {
 export function AboutPage() {
   const { goBack } = useAppStore()
   return (
-    <div data-frame-id="0:17215" className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div data-frame-id="0:17215" className="page-shell bg-[#f5f6f8]">
       <NavBar title="关于医百顺" onBack={goBack} />
+      <div className="page-scroll">
       <div className="pt-[40px] flex flex-col items-center">
         <div className="w-[64px] h-[64px] rounded-[16px] bg-[#1890ff] text-white text-[22px] font-bold flex items-center justify-center">
           医百顺
         </div>
         <div className="mt-[10px] text-[#333333] text-[16px] font-medium">医百顺互联网医院</div>
         <div className="text-[#888888] text-[12px] mt-[4px]">Version 2.4.0</div>
+      </div>
       </div>
     </div>
   )
@@ -2664,8 +2764,9 @@ export function HelpFeedbackPage() {
   const { showToast, goBack } = useAppStore()
   const [text, setText] = useState('')
   return (
-    <div className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div className="page-shell bg-[#f5f6f8]">
       <NavBar title="帮助与反馈" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[10px] bg-white rounded-[8px] p-[14px]">
         <div className="text-[#333333] text-[14px] font-medium mb-[8px]">问题与意见反馈</div>
         <textarea
@@ -2686,6 +2787,7 @@ export function HelpFeedbackPage() {
           提交反馈
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -2693,8 +2795,9 @@ export function HelpFeedbackPage() {
 export function AiTonguePage() {
   const { navigate, goBack } = useAppStore()
   return (
-    <div className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]">
+    <div className="page-shell bg-[#f5f6f8]">
       <NavBar title="智能舌诊辨体质" onBack={goBack} />
+      <div className="page-scroll">
       <div className="m-[12px] bg-white rounded-[10px] p-[16px] text-center">
         <img
           src="/assets/extracted/home-ai-banner.png"
@@ -2714,6 +2817,7 @@ export function AiTonguePage() {
         >
           预约中医科专家辨证调理
         </button>
+      </div>
       </div>
     </div>
   )
@@ -2735,8 +2839,9 @@ export function FrameViewerPage() {
   return (
     <div
       data-frame-id={cleanId}
-      className="relative w-[375px] min-h-[667px] bg-[#f5f6f8]"
+      className="page-shell bg-[#f5f6f8]"
     >
+      <div className="page-scroll">
       <div className="relative">
         <img
           src={pngSrc}
@@ -2750,6 +2855,7 @@ export function FrameViewerPage() {
           onClick={goBack}
           className="absolute top-[20px] left-[4px] w-[60px] h-[44px] bg-transparent border-0 cursor-pointer"
         />
+      </div>
       </div>
     </div>
   )

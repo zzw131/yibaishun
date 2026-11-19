@@ -20,11 +20,11 @@ export function FindDoctorPage() {
   )
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9', paddingBottom: 32 }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={isPrescribeMode ? '找医生·在线复诊开药' : '找医生'} />
 
       {/* 搜索与筛选栏 (0:2048) */}
-      <div style={{ backgroundColor: '#ffffff', padding: '8px 15px 12px' }}>
+      <div style={{ backgroundColor: '#ffffff', padding: '8px 15px 12px', flexShrink: 0, zIndex: 15 }}>
         <div
           style={{
             height: 32,
@@ -99,8 +99,9 @@ export function FindDoctorPage() {
       </div>
 
       {/* 医生列表 */}
-      <div style={{ padding: '10px 10px 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
-        {[...filtered, ...filtered].map((doc, idx) => (
+      <div className="page-scroll">
+        <div style={{ padding: '10px 10px 24px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {filtered.map((doc, idx) => (
           <div
             key={`${doc.id}-${idx}`}
             onClick={() => navigate('doctor-studio', { doctorId: doc.id })}
@@ -115,6 +116,7 @@ export function FindDoctorPage() {
               <img
                 src={doc.avatar}
                 alt={doc.name}
+                referrerPolicy="no-referrer"
                 style={{
                   width: 54,
                   height: 54,
@@ -286,6 +288,7 @@ export function FindDoctorPage() {
             </div>
           </div>
         ))}
+        </div>
       </div>
     </div>
   )
@@ -298,18 +301,11 @@ export function DoctorStudioPage() {
   const [studioTab, setStudioTab] = useState<'video' | 'live' | 'comment'>('video')
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: 375,
-        minHeight: 1296,
-        backgroundColor: '#f6f7f9',
-        overflow: 'hidden',
-        userSelect: 'none',
-      }}
-    >
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={`${doc.name}医生工作室`} bgColor="#f6f7f9" />
 
+      <div className="page-scroll">
+        <div style={{ paddingBottom: 20 }}>
       {/* 顶部医生名片卡 (0:19126) */}
       <div
         style={{
@@ -338,6 +334,7 @@ export function DoctorStudioPage() {
           <img
             src={doc.avatar}
             alt={doc.name}
+            referrerPolicy="no-referrer"
             style={{
               width: 68,
               height: 68,
@@ -438,8 +435,15 @@ export function DoctorStudioPage() {
             cursor: 'pointer',
           }}
         >
-          <span>
-            擅长：具有多年婴幼儿血管瘤畸形的临床诊治经验，擅长各类型婴幼儿血管瘤婴幼儿血管瘤婴幼儿血管瘤类…
+          <span
+            style={{
+              display: '-webkit-box',
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: 'vertical',
+              overflow: 'hidden',
+            }}
+          >
+            {doc.goodAt} · {doc.bio}
           </span>
           <img
             src="/assets/design-source/svg/0-19412.svg"
@@ -687,14 +691,15 @@ export function DoctorStudioPage() {
           </div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: '161px 161px', gap: 13 }}>
-            {VIDEO_CARDS.slice(0, 4).map((card, idx) => {
-              const isIll = card.coverImgSrc.includes('imgWebp2')
+            {VIDEO_CARDS.slice(0, 4).map((card) => {
+              const isIll = card.coverFit === 'crop' && card.coverImgSrc.includes('imgWebp2')
+              const isCropWebp1 = card.coverFit === 'crop' && card.coverImgSrc.includes('imgWebp1')
               return (
                 <div
                   key={card.id}
                   onClick={() =>
                     studioTab === 'video'
-                      ? navigate('video-detail', { videoId: `vid-${idx + 1}` })
+                      ? navigate('video-detail', { videoId: card.videoId })
                       : navigate('live-room', { liveId: 'live-1' })
                   }
                   style={{ width: 161, cursor: 'pointer' }}
@@ -706,28 +711,42 @@ export function DoctorStudioPage() {
                       height: 187,
                       borderRadius: 6,
                       overflow: 'hidden',
+                      backgroundColor: '#eaeaea',
                     }}
                   >
                     <img
                       src={card.coverImgSrc}
                       alt=""
-                      style={{
-                        position: 'absolute',
-                        left: isIll ? -8 : 0,
-                        top: isIll ? -82 : -5,
-                        width: isIll ? 177 : 161,
-                        height: isIll ? 279 : 191,
-                      }}
+                      referrerPolicy="no-referrer"
+                      style={
+                        isIll
+                          ? {
+                              position: 'absolute',
+                              left: -8,
+                              top: -82,
+                              width: 177,
+                              height: 279,
+                            }
+                          : isCropWebp1
+                            ? {
+                                position: 'absolute',
+                                left: 0,
+                                top: -5,
+                                width: 161,
+                                height: 191,
+                              }
+                            : {
+                                width: 161,
+                                height: 187,
+                                objectFit: 'cover',
+                                display: 'block',
+                              }
+                      }
                     />
                     <img
-                      src="/assets/icons/imgOval4.svg"
+                      src="/assets/icons/img3.svg"
                       alt=""
-                      style={{ position: 'absolute', left: 63, top: 76, width: 36, height: 36 }}
-                    />
-                    <img
-                      src="/assets/icons/imgTriangle1.svg"
-                      alt=""
-                      style={{ position: 'absolute', left: 77, top: 88, width: 10, height: 12 }}
+                      style={{ position: 'absolute', left: 58, top: 71, width: 45, height: 45, display: 'block' }}
                     />
                   </div>
                   <div
@@ -738,6 +757,9 @@ export function DoctorStudioPage() {
                       lineHeight: '19px',
                       color: '#333333',
                       height: 38,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
                       overflow: 'hidden',
                     }}
                   >
@@ -751,18 +773,23 @@ export function DoctorStudioPage() {
                       justifyContent: 'space-between',
                     }}
                   >
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, minWidth: 0, maxWidth: 108, overflow: 'hidden', whiteSpace: 'nowrap' }}>
                       <img
-                        src="/assets/images/img2.png"
+                        src={card.authorAvatarSrc || '/assets/images/img2.png'}
                         alt=""
-                        style={{ width: 22, height: 22, borderRadius: '50%' }}
+                        referrerPolicy="no-referrer"
+                        style={{ width: 22, height: 22, borderRadius: '50%', objectFit: 'cover', flexShrink: 0 }}
                       />
-                      <span style={{ fontSize: 12, fontWeight: 500, color: '#333333' }}>罗定</span>
-                      <span style={{ fontSize: 12, color: '#666666' }}>肾病科</span>
+                      <span style={{ fontSize: 12, fontWeight: 500, color: '#333333', flexShrink: 0 }}>
+                        {card.author}
+                      </span>
+                      <span style={{ fontSize: 12, color: '#666666', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                        {card.department}
+                      </span>
                     </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 4, flexShrink: 0 }}>
                       <img src="/assets/icons/imgIcon4.svg" alt="" style={{ width: 11, height: 7 }} />
-                      <span style={{ fontSize: 12, color: '#999999' }}>1567</span>
+                      <span style={{ fontSize: 12, color: '#999999' }}>{card.views}</span>
                     </div>
                   </div>
                 </div>
@@ -787,6 +814,8 @@ export function DoctorStudioPage() {
           查看更多 ⌄
         </button>
       </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -797,9 +826,10 @@ export function DoctorBioPage() {
   const doc = doctors.find((d) => d.id === doctorId) || doctors[0]
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="医生简介" />
-      <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div className="page-scroll">
+        <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div
           style={{
             backgroundColor: '#ffffff',
@@ -814,6 +844,7 @@ export function DoctorBioPage() {
             <img
               src={doc.avatar}
               alt={doc.name}
+              referrerPolicy="no-referrer"
               style={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover' }}
             />
             <div>
@@ -867,6 +898,7 @@ export function DoctorBioPage() {
           ))}
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -882,9 +914,10 @@ export function SpecialtyListPage() {
   ]
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="专病专科" />
-      <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div className="page-scroll">
+        <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
         {specialties.map((sp) => (
           <div
             key={sp.name}
@@ -924,6 +957,7 @@ export function SpecialtyListPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -934,9 +968,11 @@ export function SpecialtyDetailPage() {
   const titleName = currentRoute.params?.name || '血管瘤专病中心'
 
   return (
-    <div style={{ width: 375, minHeight: 1200, backgroundColor: '#f6f7f9', paddingBottom: 30 }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={titleName} />
 
+      <div className="page-scroll">
+        <div style={{ paddingBottom: 30 }}>
       {/* 顶部专病插画 Banner (0:22525) */}
       <div style={{ padding: '10px 12px 0' }}>
         <img
@@ -949,6 +985,9 @@ export function SpecialtyDetailPage() {
       {/* 吸顶切换标签 (0:22826 / 0:23559 / 0:23366 / 0:23124) */}
       <div
         style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 10,
           marginTop: 10,
           backgroundColor: '#ffffff',
           height: 44,
@@ -1032,6 +1071,7 @@ export function SpecialtyDetailPage() {
                 <img
                   src={doc.avatar}
                   alt={doc.name}
+                  referrerPolicy="no-referrer"
                   style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover' }}
                 />
                 <div>
@@ -1123,12 +1163,15 @@ export function SpecialtyDetailPage() {
               <img
                 src={art.thumb}
                 alt=""
+                referrerPolicy="no-referrer"
                 style={{ width: 88, height: 64, borderRadius: 6, objectFit: 'cover' }}
               />
             </div>
           ))}
         </div>
       )}
+        </div>
+      </div>
     </div>
   )
 }

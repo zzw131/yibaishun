@@ -3,11 +3,23 @@ import { useAppStore } from '../store/appStore'
 
 interface VideoSectionProps {
   searchQuery?: string
+  offsetY?: number
 }
 
-function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => void }) {
+function VideoCard({
+  card,
+  onSelect,
+  offsetY = 142,
+}: {
+  card: VideoCardItem
+  onSelect: () => void
+  offsetY?: number
+}) {
   const relImgX = card.coverImgX - card.coverX
   const relImgY = card.coverImgY - card.coverY
+  const baseX = card.coverX
+  const baseY = card.coverY
+  const cardHeight = card.viewsY + card.viewsH - card.coverY
 
   return (
     <div
@@ -20,14 +32,21 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
           onSelect()
         }
       }}
-      style={{ cursor: 'pointer' }}
+      style={{
+        position: 'absolute',
+        left: baseX,
+        top: baseY - offsetY,
+        width: card.coverW,
+        height: cardHeight,
+        cursor: 'pointer',
+      }}
     >
       {/* 封面遮罩与背景 (162 × 184, rx=5) */}
       <div
         style={{
           position: 'absolute',
-          left: card.coverX,
-          top: card.coverY,
+          left: 0,
+          top: 0,
           width: card.coverW,
           height: card.coverH,
           backgroundColor: '#D8D8D8',
@@ -37,16 +56,29 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
       >
         <img
           src={card.coverImgSrc}
-          alt=""
-          style={{
-            position: 'absolute',
-            left: relImgX,
-            top: relImgY,
-            width: card.coverImgW,
-            height: card.coverImgH,
-            display: 'block',
-            maxWidth: 'none',
-          }}
+          alt={card.title}
+          referrerPolicy="no-referrer"
+          style={
+            card.coverFit === 'cover'
+              ? {
+                  position: 'absolute',
+                  left: 0,
+                  top: 0,
+                  width: card.coverW,
+                  height: card.coverH,
+                  objectFit: 'cover',
+                  display: 'block',
+                }
+              : {
+                  position: 'absolute',
+                  left: relImgX,
+                  top: relImgY,
+                  width: card.coverImgW,
+                  height: card.coverImgH,
+                  display: 'block',
+                  maxWidth: 'none',
+                }
+          }
         />
         {card.hasTopGreySquare && (
           <div
@@ -81,15 +113,15 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
         data-node-id={card.playNodeId}
         style={{
           position: 'absolute',
-          left: card.playX,
-          top: card.playY,
+          left: card.playX - baseX,
+          top: card.playY - baseY,
           width: card.playSize,
           height: card.playSize,
           pointerEvents: 'none',
         }}
       >
         <img
-          src="/assets/icons/imgOval4.svg"
+          src="/assets/icons/img3.svg"
           alt=""
           style={{
             position: 'absolute',
@@ -100,18 +132,6 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
             display: 'block',
           }}
         />
-        <img
-          src="/assets/icons/imgTriangle1.svg"
-          alt=""
-          style={{
-            position: 'absolute',
-            left: 17.5,
-            top: 15,
-            width: 12,
-            height: 15,
-            display: 'block',
-          }}
-        />
       </div>
 
       {/* 视频标题 */}
@@ -119,8 +139,8 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
         data-node-id={card.titleNodeId}
         style={{
           position: 'absolute',
-          left: card.titleX,
-          top: card.titleY,
+          left: card.titleX - baseX,
+          top: card.titleY - baseY,
           width: card.titleW,
           height: card.titleH,
           fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
@@ -128,7 +148,10 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
           fontWeight: 500,
           lineHeight: '19px',
           color: '#333333',
-          textAlign: 'justify',
+          overflow: 'hidden',
+          display: '-webkit-box',
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: 'vertical',
         }}
       >
         {card.title}
@@ -139,8 +162,8 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
         data-node-id={card.avatarGroupNodeId}
         style={{
           position: 'absolute',
-          left: card.avatarX,
-          top: card.avatarY,
+          left: card.avatarX - baseX,
+          top: card.avatarY - baseY,
           width: card.avatarSize,
           height: card.avatarSize,
           borderRadius: '50%',
@@ -149,93 +172,86 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
         }}
       >
         <img
-          src="/assets/images/img2.png"
-          alt=""
+          src={card.authorAvatarSrc || '/assets/images/img2.png'}
+          alt={card.author}
+          referrerPolicy="no-referrer"
           style={{
             position: 'absolute',
             left: 0,
             top: 0,
             width: 22,
             height: 22,
+            objectFit: 'cover',
             display: 'block',
           }}
         />
       </div>
 
-      {/* 作者名 */}
-      <span
-        data-node-id={card.authorNodeId}
+      {/* 作者名与科室 */}
+      <div
         style={{
           position: 'absolute',
-          left: card.authorX,
-          top: card.authorY,
-          width: card.authorW,
+          left: card.authorX - baseX,
+          top: card.authorY - baseY,
+          width: card.eyeX - card.authorX - 4,
           height: card.authorH,
-          fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
-          fontSize: 12,
-          fontWeight: 500,
-          lineHeight: '18px',
-          color: '#333333',
-          textAlign: 'justify',
-          whiteSpace: 'nowrap',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 4,
+          overflow: 'hidden',
         }}
       >
-        {card.author}
-      </span>
-
-      {/* 科室名 */}
-      <span
-        data-node-id={card.deptNodeId}
-        style={{
-          position: 'absolute',
-          left: card.deptX,
-          top: card.deptY,
-          width: card.deptW,
-          height: card.deptH,
-          fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
-          fontSize: 12,
-          fontWeight: 400,
-          lineHeight: '18px',
-          color: '#666666',
-          textAlign: 'justify',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {card.department}
-      </span>
+        <span
+          data-node-id={card.authorNodeId}
+          style={{
+            fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
+            fontSize: 12,
+            fontWeight: 500,
+            lineHeight: '18px',
+            color: '#333333',
+            whiteSpace: 'nowrap',
+            flexShrink: 0,
+          }}
+        >
+          {card.author}
+        </span>
+        <span
+          data-node-id={card.deptNodeId}
+          style={{
+            fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
+            fontSize: 12,
+            fontWeight: 400,
+            lineHeight: '18px',
+            color: '#666666',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}
+        >
+          {card.department}
+        </span>
+      </div>
 
       {/* 浏览量眼睛图标 (12 × 12) */}
       <div
         data-node-id={card.eyeNodeId}
         style={{
           position: 'absolute',
-          left: card.eyeX,
-          top: card.eyeY,
+          left: card.eyeX - baseX,
+          top: card.eyeY - baseY,
           width: card.eyeSize,
           height: card.eyeSize,
         }}
       >
         <img
-          src="/assets/icons/imgShape1.svg"
+          src="/assets/icons/imgIcon4.svg"
           alt=""
           style={{
             position: 'absolute',
-            left: 0.6667,
-            top: 2.5714,
-            width: 10.6667,
-            height: 6.8571,
-            display: 'block',
-          }}
-        />
-        <img
-          src="/assets/icons/imgOval2.svg"
-          alt=""
-          style={{
-            position: 'absolute',
-            left: 4.2857,
-            top: 4.2857,
-            width: 3.4286,
-            height: 3.4286,
+            left: 0,
+            top: 0,
+            width: 12,
+            height: 12,
             display: 'block',
           }}
         />
@@ -246,8 +262,8 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
         data-node-id={card.viewsNodeId}
         style={{
           position: 'absolute',
-          left: card.viewsX,
-          top: card.viewsY,
+          left: card.viewsX - baseX,
+          top: card.viewsY - baseY,
           width: card.viewsW,
           height: card.viewsH,
           fontFamily: ' Arial, "Helvetica Neue", Helvetica, sans-serif',
@@ -265,7 +281,7 @@ function VideoCard({ card, onSelect }: { card: VideoCardItem; onSelect: () => vo
   )
 }
 
-export function VideoSection({ searchQuery = '' }: VideoSectionProps) {
+export function VideoSection({ searchQuery = '', offsetY = 142 }: VideoSectionProps) {
   const { navigate } = useAppStore()
   const normalizedQuery = searchQuery.trim()
   const filteredCards = normalizedQuery
@@ -285,7 +301,7 @@ export function VideoSection({ searchQuery = '' }: VideoSectionProps) {
         style={{
           position: 'absolute',
           left: 10,
-          top: 277,
+          top: 277 - offsetY,
           width: 355,
           height: 1194,
           backgroundColor: '#FFFFFF',
@@ -299,7 +315,7 @@ export function VideoSection({ searchQuery = '' }: VideoSectionProps) {
         style={{
           position: 'absolute',
           left: 20,
-          top: 289,
+          top: 289 - offsetY,
           width: 69,
           height: 24,
           fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
@@ -315,11 +331,12 @@ export function VideoSection({ searchQuery = '' }: VideoSectionProps) {
       </div>
 
       {/* 8 张视频卡片 */}
-      {filteredCards.map((card, idx) => (
+      {filteredCards.map((card) => (
         <VideoCard
           key={card.id}
           card={card}
-          onSelect={() => navigate('video-detail', { videoId: `vid-${(idx % 6) + 1}` })}
+          offsetY={offsetY}
+          onSelect={() => navigate('video-detail', { videoId: card.videoId })}
         />
       ))}
 
@@ -329,7 +346,7 @@ export function VideoSection({ searchQuery = '' }: VideoSectionProps) {
         style={{
           position: 'absolute',
           left: 10,
-          top: 1427,
+          top: 1427 - offsetY,
           width: 355,
           height: 1,
           backgroundColor: '#FAFAFA',
@@ -342,7 +359,7 @@ export function VideoSection({ searchQuery = '' }: VideoSectionProps) {
         style={{
           position: 'absolute',
           left: 156,
-          top: 1443,
+          top: 1443 - offsetY,
           width: 63,
           height: 18,
           fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',

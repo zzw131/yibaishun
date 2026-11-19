@@ -54,21 +54,20 @@ interface BottomTabBarProps {
   offsetX?: number
 }
 
-export function BottomTabBar({ top = 1481, offsetX = 0 }: BottomTabBarProps) {
+export function BottomTabBar({ offsetX = 0 }: BottomTabBarProps) {
   const { activeTab, switchPrimaryTab } = useAppStore()
 
   return (
     <nav
       aria-label="底部导航栏"
       style={{
-        position: 'absolute',
-        left: 0,
-        top,
+        position: 'relative',
         width: 375,
         height: 49,
         backgroundColor: '#ffffff',
         boxShadow: '0px -1px 0px rgba(0, 0, 0, 0.05)',
-        zIndex: 20,
+        flexShrink: 0,
+        zIndex: 30,
       }}
     >
       {BOTTOM_TABS.map((item) => {

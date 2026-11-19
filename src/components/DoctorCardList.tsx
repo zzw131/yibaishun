@@ -1,7 +1,7 @@
 import { DOCTOR_CARDS } from '../data/figmaData'
 import { useAppStore } from '../store/appStore'
 
-export function DoctorCardList() {
+export function DoctorCardList({ offsetY = 142 }: { offsetY?: number }) {
   const { navigate } = useAppStore()
 
   return (
@@ -20,18 +20,18 @@ export function DoctorCardList() {
           <div
             key={card.id}
             data-node-id={card.cardNodeId}
-            onClick={() => navigate('doctor-studio', { doctorId: 'doc-luoding' })}
+            onClick={() => navigate('doctor-studio', { doctorId: card.doctorId })}
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
-                navigate('doctor-studio', { doctorId: 'doc-luoding' })
+                navigate('doctor-studio', { doctorId: card.doctorId })
               }
             }}
             style={{
               position: 'absolute',
               left: card.cardX,
-              top: card.cardY,
+              top: card.cardY - offsetY,
               width: card.cardW,
               height: card.cardH,
               backgroundColor: '#FFFFFF',
@@ -52,32 +52,51 @@ export function DoctorCardList() {
                 overflow: 'hidden',
               }}
             >
-              <img
-                src="/assets/images/avatar-fill-original.png"
-                alt=""
-                style={{
-                  position: 'absolute',
-                  left: 0,
-                  top: 0,
-                  width: card.avatarSize,
-                  height: card.avatarSize,
-                  objectFit: 'cover',
-                  display: 'block',
-                }}
-              />
-              <img
-                src="/assets/images/imgBitmap1.png"
-                alt=""
-                style={{
-                  position: 'absolute',
-                  left: relImgX,
-                  top: relImgY,
-                  width: card.imgW,
-                  height: card.imgH,
-                  display: 'block',
-                  maxWidth: 'none',
-                }}
-              />
+              {card.avatarSrc ? (
+                <img
+                  src={card.avatarSrc}
+                  alt={card.name}
+                  referrerPolicy="no-referrer"
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    width: card.avatarSize,
+                    height: card.avatarSize,
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                />
+              ) : (
+                <>
+                  <img
+                    src="/assets/images/avatar-fill-original.png"
+                    alt={card.name}
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      top: 0,
+                      width: card.avatarSize,
+                      height: card.avatarSize,
+                      objectFit: 'cover',
+                      display: 'block',
+                    }}
+                  />
+                  <img
+                    src="/assets/images/imgBitmap1.png"
+                    alt=""
+                    style={{
+                      position: 'absolute',
+                      left: relImgX,
+                      top: relImgY,
+                      width: card.imgW,
+                      height: card.imgH,
+                      display: 'block',
+                      maxWidth: 'none',
+                    }}
+                  />
+                </>
+              )}
             </div>
 
             {/* 医生姓名 */}
@@ -85,9 +104,9 @@ export function DoctorCardList() {
               data-node-id={card.nameNodeId}
               style={{
                 position: 'absolute',
-                left: relNameX,
+                left: 0,
                 top: relNameY,
-                width: card.nameW,
+                width: card.cardW,
                 height: card.nameH,
                 fontFamily: '"PingFang SC", -apple-system, BlinkMacSystemFont, sans-serif',
                 fontSize: 14,

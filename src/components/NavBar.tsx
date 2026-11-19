@@ -136,7 +136,7 @@ interface WechatCapsuleProps {
 }
 
 export function WechatCapsule({ top = 28, light = false }: WechatCapsuleProps) {
-  const { navigate, resetDemoState, showToast } = useAppStore()
+  const { navigate, resetDemoState, switchPrimaryTab } = useAppStore()
   const [menuOpen, setMenuOpen] = useState(false)
 
   return (
@@ -218,8 +218,8 @@ export function WechatCapsule({ top = 28, light = false }: WechatCapsuleProps) {
 
         <button
           type="button"
-          onClick={() => showToast('医百顺患者端小程序演示运行中')}
-          title="小程序胶囊"
+          onClick={() => switchPrimaryTab('home')}
+          title="返回首页"
           style={{
             position: 'relative',
             width: 39.5,
@@ -375,6 +375,7 @@ export function NavBar({
         height: 64,
         backgroundColor: bgColor,
         flexShrink: 0,
+        zIndex: 20,
       }}
     >
       <StatusBar light={light} />
@@ -437,7 +438,7 @@ export function NavBar({
           onClick={onRightClick}
           style={{
             position: 'absolute',
-            right: 88,
+            right: 102,
             top: 31,
             height: 24,
             background: 'transparent',

@@ -1,5 +1,6 @@
 import React from 'react'
 import { AppProvider, useAppStore } from './store/appStore'
+import { BottomTabBar } from './components/BottomTabBar'
 import { HomePage } from './pages/HomePage'
 import { DiscoverPage } from './pages/DiscoverPage'
 import { ConsultRecordsPage } from './pages/ConsultRecordsPage'
@@ -89,7 +90,7 @@ import {
 } from './pages/OrderAndToolPages'
 
 function AppRouter() {
-  const { activeTab, currentRoute, toast } = useAppStore()
+  const { activeTab, currentRoute, routeStack, toast } = useAppStore()
 
   const renderPage = () => {
     switch (currentRoute.page) {
@@ -254,33 +255,43 @@ function AppRouter() {
     }
   }
 
+  const slotKey =
+    currentRoute.page === 'root'
+      ? `root-${activeTab}`
+      : `sec-${routeStack.length}-${currentRoute.page}`
+
   return (
     <div className="viewport-shell">
-      {renderPage()}
-      {toast && (
-        <div
-          role="status"
-          style={{
-            position: 'fixed',
-            top: 84,
-            left: '50%',
-            transform: 'translateX(-50%)',
-            backgroundColor: 'rgba(17, 24, 39, 0.88)',
-            color: '#ffffff',
-            fontSize: 13,
-            lineHeight: '18px',
-            padding: '8px 16px',
-            borderRadius: 18,
-            zIndex: 9999,
-            maxWidth: 320,
-            textAlign: 'center',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
-            pointerEvents: 'none',
-          }}
-        >
-          {toast}
+      <div className="app-frame">
+        <div className="app-page-slot" key={slotKey}>
+          {renderPage()}
         </div>
-      )}
+        {currentRoute.page === 'root' && <BottomTabBar />}
+        {toast && (
+          <div
+            role="status"
+            style={{
+              position: 'absolute',
+              top: 84,
+              left: '50%',
+              transform: 'translateX(-50%)',
+              backgroundColor: 'rgba(17, 24, 39, 0.88)',
+              color: '#ffffff',
+              fontSize: 13,
+              lineHeight: '18px',
+              padding: '8px 16px',
+              borderRadius: 18,
+              zIndex: 9999,
+              maxWidth: 320,
+              textAlign: 'center',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.18)',
+              pointerEvents: 'none',
+            }}
+          >
+            {toast}
+          </div>
+        )}
+      </div>
     </div>
   )
 }

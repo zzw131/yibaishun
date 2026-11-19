@@ -29,19 +29,20 @@ export function SearchPage() {
   }
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#ffffff' }}>
-      <NavBar title="搜索" />
+    <div className="page-shell" style={{ backgroundColor: '#ffffff' }}>
+      <div className="page-top" style={{ backgroundColor: '#ffffff' }}>
+        <NavBar title="搜索" />
 
-      {/* 搜索输入框 (0:1114 / 0:1037) */}
-      <div
-        style={{
-          padding: '8px 15px 12px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-          borderBottom: '0.5px solid #f0f0f0',
-        }}
-      >
+        {/* 搜索输入框 (0:1114 / 0:1037) */}
+        <div
+          style={{
+            padding: '8px 15px 12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10,
+            borderBottom: '0.5px solid #f0f0f0',
+          }}
+        >
         <div
           style={{
             flex: 1,
@@ -108,8 +109,10 @@ export function SearchPage() {
         >
           {keyword.trim() ? '搜索' : '取消'}
         </button>
+        </div>
       </div>
 
+      <div className="page-scroll">
       {!q ? (
         <div style={{ padding: 15 }}>
           {/* 历史搜索 (0:1037) */}
@@ -231,6 +234,10 @@ export function SearchPage() {
         <div>
           <div
             style={{
+              position: 'sticky',
+              top: 0,
+              zIndex: 10,
+              backgroundColor: '#ffffff',
               display: 'flex',
               justifyContent: 'space-around',
               height: 40,
@@ -379,6 +386,7 @@ export function SearchPage() {
           </div>
         </div>
       )}
+      </div>
 
       {/* 删除历史确认框 (0:1244) */}
       {confirmClearModal && (
@@ -387,7 +395,7 @@ export function SearchPage() {
             position: 'fixed',
             inset: 0,
             backgroundColor: 'rgba(0,0,0,0.45)',
-            zIndex: 100,
+            zIndex: 200,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -464,9 +472,10 @@ export function LoginPage() {
   }
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#ffffff', position: 'relative' }}>
+    <div className="page-shell" style={{ backgroundColor: '#ffffff' }}>
       <NavBar title="登录医百顺" />
 
+      <div className="page-scroll">
       <div
         style={{
           padding: '36px 28px 24px',
@@ -646,6 +655,7 @@ export function LoginPage() {
           </div>
         )}
       </div>
+      </div>
 
       {/* 图形验证码弹窗 (0:548) */}
       {step === 'captcha' && (
@@ -654,7 +664,7 @@ export function LoginPage() {
             position: 'fixed',
             inset: 0,
             backgroundColor: 'rgba(0,0,0,0.45)',
-            zIndex: 100,
+            zIndex: 200,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -740,8 +750,9 @@ export function RegHospitalsPage() {
   ]
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="预约挂号·选医院" />
+      <div className="page-scroll">
       <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
         {hospitals.map((h) => (
           <div
@@ -783,6 +794,7 @@ export function RegHospitalsPage() {
           </div>
         ))}
       </div>
+      </div>
     </div>
   )
 }
@@ -800,35 +812,37 @@ export function RegDeptsPage() {
   }
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#ffffff' }}>
-      <NavBar title={hospital} />
+    <div className="page-shell" style={{ backgroundColor: '#ffffff' }}>
+      <div className="page-top" style={{ backgroundColor: '#ffffff' }}>
+        <NavBar title={hospital} />
 
-      {/* 医院头部卡片 (0:4021) */}
-      <div
-        style={{
-          padding: 12,
-          display: 'flex',
-          gap: 10,
-          borderBottom: '8px solid #f6f7f9',
-          alignItems: 'center',
-        }}
-      >
-        <img
-          src="/assets/design-source/raster/0cb7c9f40e0f79edbfa78d5af2b03c143785dcce.png"
-          alt=""
-          style={{ width: 72, height: 52, borderRadius: 6, objectFit: 'cover' }}
-        />
-        <div>
-          <div style={{ fontSize: 15, fontWeight: 600, color: '#333333' }}>{hospital}</div>
-          <div style={{ fontSize: 12, color: '#666666', marginTop: 4 }}>
-            二级甲等 · 支持在线医保/自费预约挂号
+        {/* 医院头部卡片 (0:4021) */}
+        <div
+          style={{
+            padding: 12,
+            display: 'flex',
+            gap: 10,
+            borderBottom: '8px solid #f6f7f9',
+            alignItems: 'center',
+          }}
+        >
+          <img
+            src="/assets/design-source/raster/0cb7c9f40e0f79edbfa78d5af2b03c143785dcce.png"
+            alt=""
+            style={{ width: 72, height: 52, borderRadius: 6, objectFit: 'cover' }}
+          />
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 600, color: '#333333' }}>{hospital}</div>
+            <div style={{ fontSize: 12, color: '#666666', marginTop: 4 }}>
+              二级甲等 · 支持在线医保/自费预约挂号
+            </div>
           </div>
         </div>
       </div>
 
       {/* 左右分栏科室选择 */}
-      <div style={{ display: 'flex', minHeight: 500 }}>
-        <div style={{ width: 120, backgroundColor: '#f6f7f9' }}>
+      <div style={{ flex: 1, minHeight: 0, display: 'flex', overflow: 'hidden' }}>
+        <div style={{ width: 120, backgroundColor: '#f6f7f9', overflowY: 'auto' }}>
           {Object.keys(deptTree).map((cat) => (
             <button
               key={cat}
@@ -849,7 +863,7 @@ export function RegDeptsPage() {
             </button>
           ))}
         </div>
-        <div style={{ flex: 1, padding: '0 14px' }}>
+        <div style={{ flex: 1, padding: '0 14px', overflowY: 'auto' }}>
           {(deptTree[selectedMain] || []).map((sub) => (
             <div
               key={sub}
@@ -886,19 +900,21 @@ export function RegSlotsPage() {
   const isNoSlotDay = selectedDate.includes('无号') || currentRoute.params?.frameId === '0:4222'
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9' }}>
-      <NavBar title={`${dept}·号源列表`} />
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
+      <div className="page-top" style={{ backgroundColor: '#ffffff' }}>
+        <NavBar title={`${dept}·号源列表`} />
 
-      {/* 日期选择栏 (0:4084) */}
-      <div
-        style={{
-          backgroundColor: '#ffffff',
-          padding: '10px 12px',
-          display: 'flex',
-          gap: 8,
-          overflowX: 'auto',
-        }}
-      >
+        {/* 日期选择栏 (0:4084) */}
+        <div
+          style={{
+            backgroundColor: '#ffffff',
+            padding: '10px 12px',
+            display: 'flex',
+            gap: 8,
+            overflowX: 'auto',
+            borderBottom: '0.5px solid #eeeeee',
+          }}
+        >
         {dates.map((d) => {
           const active = selectedDate === d
           return (
@@ -921,8 +937,10 @@ export function RegSlotsPage() {
             </button>
           )
         })}
+        </div>
       </div>
 
+      <div className="page-scroll">
       {isNoSlotDay ? (
         /* 无号源缺省页 (0:4222 / 0:114616) */
         <div
@@ -1012,6 +1030,7 @@ export function RegSlotsPage() {
           ))}
         </div>
       )}
+      </div>
 
       {/* 选择就诊时间段弹框 (0:4329) */}
       {slotModalDoctor && (
@@ -1020,7 +1039,7 @@ export function RegSlotsPage() {
             position: 'fixed',
             inset: 0,
             backgroundColor: 'rgba(0,0,0,0.45)',
-            zIndex: 100,
+            zIndex: 200,
             display: 'flex',
             alignItems: 'flex-end',
             justifyContent: 'center',
@@ -1096,9 +1115,10 @@ export function RegConfirmPage() {
   const slotTime = currentRoute.params?.slotTime || '2022-02-25 上午 08:30-09:30'
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="确定挂号信息" />
 
+      <div className="page-scroll">
       <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 15 }}>
           <div style={{ fontSize: 16, fontWeight: 600, color: '#333333', marginBottom: 10 }}>
@@ -1163,6 +1183,7 @@ export function RegConfirmPage() {
           确认挂号并去支付 (¥{doc.regFee}.00)
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1187,10 +1208,11 @@ export function InquiryImageFormPage() {
   const [uploadedCount, setUploadedCount] = useState(1)
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9', paddingBottom: 30 }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="填写病情·图文问诊" />
 
-      <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div className="page-scroll">
+      <div style={{ padding: 12, paddingBottom: 24, display: 'flex', flexDirection: 'column', gap: 10 }}>
         {/* 选择问诊人 (0:3257) */}
         <div
           onClick={() => navigate('patient-select')}
@@ -1334,6 +1356,7 @@ export function InquiryImageFormPage() {
           提交病情并支付 (¥{doc.imageFee}.00)
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1356,9 +1379,10 @@ export function InquiryAvFormPage() {
   const [symptom, setSymptom] = useState('希望通过音视频详细咨询血管瘤激光术后恢复情况。')
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={type === 'phone' ? '电话问诊预约' : '视频问诊预约'} />
 
+      <div className="page-scroll">
       <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div
           onClick={() => navigate('patient-select')}
@@ -1453,6 +1477,7 @@ export function InquiryAvFormPage() {
           立即预约并支付 (¥{fee}.00)
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1463,9 +1488,10 @@ export function PatientSelectPage() {
   const isEmpty = Boolean(currentRoute.params?.empty) || patients.length === 0
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="选择就诊人" />
 
+      <div className="page-scroll">
       {isEmpty ? (
         <div
           style={{
@@ -1570,6 +1596,7 @@ export function PatientSelectPage() {
           + 新增就诊人 (0:949)
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1587,8 +1614,9 @@ export function PatientEditPage() {
   const [isDefault, setIsDefault] = useState(existing?.isDefault ?? true)
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={existing ? '修改就诊人' : '新增就诊人'} />
+      <div className="page-scroll">
       <div style={{ padding: 12, display: 'flex', flexDirection: 'column', gap: 10 }}>
         <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: '4px 14px' }}>
           <div
@@ -1743,6 +1771,7 @@ export function PatientEditPage() {
           保存并返回
         </button>
       </div>
+      </div>
     </div>
   )
 }
@@ -1755,11 +1784,12 @@ export function ChatFreePage() {
   const [inputText, setInputText] = useState('')
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9', paddingBottom: 60 }}>
-      <NavBar title="刘丹专家团队（4）" />
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
+      <div className="page-top" style={{ backgroundColor: '#ffffff' }}>
+        <NavBar title="刘丹专家团队（4）" />
 
-      {/* 顶部团队成员展开条 (0:16194 / 0:45233) */}
-      <div style={{ backgroundColor: '#ffffff', padding: '10px 15px', borderBottom: '0.5px solid #eeeeee' }}>
+        {/* 顶部团队成员展开条 (0:16194 / 0:45233) */}
+        <div style={{ backgroundColor: '#ffffff', padding: '10px 15px', borderBottom: '0.5px solid #eeeeee' }}>
         <div
           onClick={() => setShowTeamMembers((v) => !v)}
           style={{
@@ -1806,9 +1836,11 @@ export function ChatFreePage() {
             ))}
           </div>
         )}
+        </div>
       </div>
 
       {/* 聊天消息流 */}
+      <div className="page-scroll">
       <div style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 14 }}>
         {con.messages.map((m) => {
           const isMe = m.sender === 'patient'
@@ -1859,13 +1891,12 @@ export function ChatFreePage() {
           )
         })}
       </div>
+      </div>
 
       {/* 底部发送栏 */}
       <div
+        className="page-bottom-bar"
         style={{
-          position: 'fixed',
-          bottom: 0,
-          width: 375,
           height: 54,
           backgroundColor: '#ffffff',
           borderTop: '0.5px solid #eeeeee',
@@ -1930,11 +1961,12 @@ export function ChatImagePage() {
   const [text, setText] = useState('')
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9', paddingBottom: 64 }}>
-      <NavBar title={isRealtime ? '实时在线问诊' : `${con.doctorName}医生·图文问诊`} />
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
+      <div className="page-top" style={{ backgroundColor: '#ffffff' }}>
+        <NavBar title={isRealtime ? '实时在线问诊' : `${con.doctorName}医生·图文问诊`} />
 
-      {/* 顶部病情摘要与操作条 (0:4895 / 0:5505) */}
-      <div
+        {/* 顶部病情摘要与操作条 (0:4895 / 0:5505) */}
+        <div
         style={{
           backgroundColor: '#ffffff',
           padding: '10px 14px',
@@ -1997,9 +2029,11 @@ export function ChatImagePage() {
             {con.reviewed ? '已评价' : '去评价'}
           </button>
         </div>
+        </div>
       </div>
 
       {/* 消息列表 */}
+      <div className="page-scroll">
       <div style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 14 }}>
         {con.messages.map((m) => {
           if (m.type === 'prescription') {
@@ -2090,12 +2124,11 @@ export function ChatImagePage() {
           )
         })}
       </div>
+      </div>
 
       <div
+        className="page-bottom-bar"
         style={{
-          position: 'fixed',
-          bottom: 0,
-          width: 375,
           height: 54,
           backgroundColor: '#ffffff',
           borderTop: '0.5px solid #eeeeee',
@@ -2153,9 +2186,10 @@ export function ChatAvPage() {
   const mode = currentRoute.params?.mode || con.type
 
   return (
-    <div style={{ width: 375, minHeight: 812, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={mode === 'phone' ? '电话问诊会话' : '视频问诊会话'} />
 
+      <div className="page-scroll">
       <div style={{ padding: 14, display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -2281,6 +2315,7 @@ export function ChatAvPage() {
           </div>
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -2292,20 +2327,17 @@ export function CallRoomPage() {
 
   return (
     <div
+      className="page-shell"
       style={{
-        position: 'relative',
-        width: 375,
-        height: 812,
         backgroundColor: '#1f2633',
         color: '#ffffff',
-        overflow: 'hidden',
       }}
     >
       {initialMode === 'video' && callState === 'connected' && (
         <img
           src="/assets/design-source/raster/5422da4c9d29e9d6d98236929417e3f92b236b95.png"
           alt="视频通话"
-          style={{ position: 'absolute', inset: 0, width: 375, height: 812, objectFit: 'cover' }}
+          style={{ position: 'absolute', inset: 0, width: 375, height: '100%', objectFit: 'cover' }}
         />
       )}
 
@@ -2397,8 +2429,9 @@ export function ConsultSummaryPage() {
   const con = consultations.find((c) => c.id === conId) || consultations[0]
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title="问诊小结" />
+      <div className="page-scroll">
       <div style={{ padding: 12 }}>
         <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 16 }}>
           <div
@@ -2451,6 +2484,7 @@ export function ConsultSummaryPage() {
           </button>
         </div>
       </div>
+      </div>
     </div>
   )
 }
@@ -2466,9 +2500,10 @@ export function ConsultReviewPage() {
   const [submitted, setSubmitted] = useState(Boolean(con.reviewed || currentRoute.params?.done))
 
   return (
-    <div style={{ width: 375, minHeight: 667, backgroundColor: '#f6f7f9' }}>
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <NavBar title={submitted ? '评价详情' : '服务评价'} />
 
+      <div className="page-scroll">
       <div style={{ padding: 12 }}>
         <div style={{ backgroundColor: '#ffffff', borderRadius: 8, padding: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 16 }}>
@@ -2563,6 +2598,7 @@ export function ConsultReviewPage() {
             {submitted ? '返回会话' : '提交评价 (0:6784 → 0:6908)'}
           </button>
         </div>
+      </div>
       </div>
     </div>
   )

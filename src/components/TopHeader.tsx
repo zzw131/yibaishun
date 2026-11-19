@@ -25,15 +25,14 @@ export function TopHeader({
 
   return (
     <header
-      className="fixed-top-header"
       style={{
-        position: 'fixed',
-        top: 0,
+        position: 'relative',
         width: 375,
         height: 142,
         backgroundColor: '#ffffff',
         boxShadow: '0px 1px 0px rgba(0, 0, 0, 0.05)',
-        zIndex: 40,
+        flexShrink: 0,
+        zIndex: 20,
       }}
     >
       <StatusBar />

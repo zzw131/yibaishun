@@ -1,9 +1,14 @@
-import { useState } from 'react'
-import { BottomTabBar } from '../components/BottomTabBar'
+import { useLayoutEffect, useRef, useState } from 'react'
+import laserDermatologyCover from '../assets/images/laser_dermatology_care_1794965706467.jpg'
+import pediatricCheckupCover from '../assets/images/pediatric_health_checkup_1794965709142.jpg'
+import pharmacyGuideCover from '../assets/images/pharmacy_medication_guide_1794965708416.jpg'
+import tcmWellnessCover from '../assets/images/tcm_herbal_wellness_1794965228624.jpg'
 import { DoctorCardList } from '../components/DoctorCardList'
 import { TopHeader } from '../components/TopHeader'
 import { VideoSection } from '../components/VideoSection'
-import { type LiveItem, useAppStore } from '../store/appStore'
+import { type DiscoverSubTab, type LiveItem, useAppStore } from '../store/appStore'
+
+const discoverScrollCache: Partial<Record<DiscoverSubTab, number>> = {}
 
 function LiveOrClassroomGrid({
   mode,
@@ -14,14 +19,32 @@ function LiveOrClassroomGrid({
 }) {
   const { lives, navigate, toggleLiveReserve } = useAppStore()
   const q = searchQuery.trim()
+  const offsetY = 142
 
   const positions = [
-    { x: 20, y: 344 },
-    { x: 194, y: 344 },
-    { x: 20, y: 618 },
-    { x: 194, y: 618 },
-    { x: 20, y: 892 },
-    { x: 194, y: 892 },
+    { x: 20, y: 344 - offsetY },
+    { x: 194, y: 344 - offsetY },
+    { x: 20, y: 618 - offsetY },
+    { x: 194, y: 618 - offsetY },
+    { x: 20, y: 892 - offsetY },
+    { x: 194, y: 892 - offsetY },
+  ]
+
+  const classroomCovers = [
+    pediatricCheckupCover,
+    tcmWellnessCover,
+    laserDermatologyCover,
+    pharmacyGuideCover,
+    '/assets/images/imgWebp1.png',
+    '/assets/illustrations/imgWebp2.png',
+  ]
+  const classroomTitles = [
+    '儿童血管瘤诊疗规范精讲',
+    '长夏健脾祛湿药膳食谱',
+    '激光术后皮肤修护与防晒课',
+    '家庭常备药安全管理规范',
+    '慢性肾脏病营养处方解读',
+    '脉管畸形微创治疗案例课',
   ]
 
   const baseList: LiveItem[] =
@@ -30,13 +53,11 @@ function LiveOrClassroomGrid({
       : lives.map((item, idx) => ({
           ...item,
           id: `class-${idx + 1}`,
+          title: classroomTitles[idx] || item.title,
           status: 'replay',
           badgeText: '',
           topRank: idx === 3,
-          cover:
-            idx === 0 || idx === 4 || idx === 5
-              ? '/assets/images/imgWebp1.png'
-              : '/assets/illustrations/imgWebp2.png',
+          cover: classroomCovers[idx % classroomCovers.length],
         }))
 
   const filtered = q
@@ -46,7 +67,7 @@ function LiveOrClassroomGrid({
     : baseList
 
   return (
-    <div style={{ position: 'relative', width: 375, height: 1277 }}>
+    <div style={{ position: 'relative', width: 375, height: 1228 - offsetY }}>
       {/* 顶部抗疫直播 Banner (0:41798 / 0:42342) */}
       <button
         type="button"
@@ -54,7 +75,7 @@ function LiveOrClassroomGrid({
         style={{
           position: 'absolute',
           left: 10,
-          top: 152,
+          top: 152 - offsetY,
           width: 355,
           height: 140,
           borderRadius: 8,
@@ -77,7 +98,7 @@ function LiveOrClassroomGrid({
         style={{
           position: 'absolute',
           left: 10,
-          top: 302,
+          top: 302 - offsetY,
           width: 355,
           height: 916,
           borderRadius: 5,
@@ -90,7 +111,7 @@ function LiveOrClassroomGrid({
         style={{
           position: 'absolute',
           left: 20,
-          top: 314,
+          top: 314 - offsetY,
           margin: 0,
           fontFamily: 'var(--font-sans)',
           fontSize: 17,
@@ -106,6 +127,7 @@ function LiveOrClassroomGrid({
       {filtered.map((item, idx) => {
         const pos = positions[idx] || positions[0]
         const isIllustration = item.cover.includes('imgWebp2')
+        const isCropWebp1 = item.cover.includes('imgWebp1')
 
         return (
           <article
@@ -144,15 +166,35 @@ function LiveOrClassroomGrid({
               <img
                 src={item.cover}
                 alt=""
-                style={{
-                  position: 'absolute',
-                  left: isIllustration ? -8 : 0,
-                  top: isIllustration ? -82 : -5,
-                  width: isIllustration ? 177 : 161,
-                  height: isIllustration ? 279 : 191,
-                  display: 'block',
-                  maxWidth: 'none',
-                }}
+                referrerPolicy="no-referrer"
+                style={
+                  isIllustration
+                    ? {
+                        position: 'absolute',
+                        left: -8,
+                        top: -82,
+                        width: 177,
+                        height: 279,
+                        display: 'block',
+                        maxWidth: 'none',
+                      }
+                    : isCropWebp1
+                      ? {
+                          position: 'absolute',
+                          left: 0,
+                          top: -5,
+                          width: 161,
+                          height: 191,
+                          display: 'block',
+                          maxWidth: 'none',
+                        }
+                      : {
+                          width: 161,
+                          height: 187,
+                          objectFit: 'cover',
+                          display: 'block',
+                        }
+                }
               />
 
               {/* 直播角标与浮层 */}
@@ -325,6 +367,10 @@ function LiveOrClassroomGrid({
                 fontWeight: 500,
                 lineHeight: '19px',
                 color: '#333333',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
               }}
             >
               {item.title}
@@ -347,37 +393,53 @@ function LiveOrClassroomGrid({
               }}
             >
               <img
-                src="/assets/images/img2.png"
+                src={item.avatar || '/assets/images/img2.png'}
                 alt=""
-                style={{ width: 22, height: 22, display: 'block' }}
+                referrerPolicy="no-referrer"
+                style={{ width: 22, height: 22, objectFit: 'cover', display: 'block' }}
               />
             </div>
-            <span
+            <div
+              onClick={(e) => {
+                e.stopPropagation()
+                navigate('doctor-studio', { doctorId: item.doctorId })
+              }}
               style={{
                 position: 'absolute',
                 left: 29,
                 top: 242,
-                fontSize: 12,
-                fontWeight: 500,
-                lineHeight: '18px',
-                color: '#333333',
+                width: 85,
+                display: 'flex',
+                alignItems: 'center',
+                gap: 4,
+                overflow: 'hidden',
+                whiteSpace: 'nowrap',
               }}
             >
-              {item.doctorName}
-            </span>
-            <span
-              style={{
-                position: 'absolute',
-                left: 55,
-                top: 242,
-                fontSize: 12,
-                fontWeight: 400,
-                lineHeight: '18px',
-                color: '#666666',
-              }}
-            >
-              {item.dept}
-            </span>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 500,
+                  lineHeight: '18px',
+                  color: '#333333',
+                  flexShrink: 0,
+                }}
+              >
+                {item.doctorName}
+              </span>
+              <span
+                style={{
+                  fontSize: 12,
+                  fontWeight: 400,
+                  lineHeight: '18px',
+                  color: '#666666',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }}
+              >
+                {item.dept}
+              </span>
+            </div>
             <img
               src="/assets/icons/imgIcon4.svg"
               alt=""
@@ -411,7 +473,7 @@ function LiveOrClassroomGrid({
         style={{
           position: 'absolute',
           left: 10,
-          top: 1174,
+          top: 1174 - offsetY,
           width: 355,
           height: 1,
           backgroundColor: '#fafafa',
@@ -421,7 +483,7 @@ function LiveOrClassroomGrid({
         style={{
           position: 'absolute',
           left: 156,
-          top: 1190,
+          top: 1190 - offsetY,
           width: 63,
           height: 18,
           fontSize: 12,
@@ -431,8 +493,6 @@ function LiveOrClassroomGrid({
       >
         没有更多啦
       </span>
-
-      <BottomTabBar top={1228} />
     </div>
   )
 }
@@ -441,14 +501,15 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
   const { articles, navigate } = useAppStore()
   const q = searchQuery.trim()
   const filtered = q ? articles.filter((a) => a.title.includes(q)) : articles
+  const offsetY = 142
 
   return (
-    <div style={{ position: 'relative', width: 375, height: 977 }}>
+    <div style={{ position: 'relative', width: 375, height: 928 - offsetY }}>
       <div
         style={{
           position: 'absolute',
           left: 10,
-          top: 152,
+          top: 152 - offsetY,
           width: 355,
           height: 766,
           borderRadius: 5,
@@ -457,7 +518,7 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
       />
 
       {filtered.slice(0, 7).map((art, idx) => {
-        const rowTop = 163 + idx * 102
+        const rowTop = 163 - offsetY + idx * 102
         return (
           <article
             key={art.id}
@@ -484,6 +545,10 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
                 fontWeight: 500,
                 lineHeight: '25px',
                 color: '#333333',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
               }}
             >
               {art.title}
@@ -562,6 +627,7 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
             <img
               src={art.thumb}
               alt=""
+              referrerPolicy="no-referrer"
               style={{
                 position: 'absolute',
                 left: 261,
@@ -594,7 +660,7 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
         style={{
           position: 'absolute',
           left: 156,
-          top: 890,
+          top: 890 - offsetY,
           width: 63,
           height: 18,
           fontSize: 12,
@@ -604,8 +670,6 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
       >
         没有更多啦
       </span>
-
-      <BottomTabBar top={928} />
     </div>
   )
 }
@@ -613,21 +677,36 @@ function NewsListSection({ searchQuery }: { searchQuery: string }) {
 export function DiscoverPage() {
   const { discoverSubTab, setDiscoverSubTab } = useAppStore()
   const [searchQuery, setSearchQuery] = useState('')
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const mountedSubTabRef = useRef<DiscoverSubTab | null>(null)
 
-  const frameHeight =
-    discoverSubTab === 'video' ? 1530 : discoverSubTab === 'news' ? 977 : 1277
+  useLayoutEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    if (mountedSubTabRef.current === null) {
+      // 首次挂载（含详情返回）：恢复当前子视图的列表滚动位置
+      el.scrollTop = discoverScrollCache[discoverSubTab] ?? 0
+    } else if (mountedSubTabRef.current !== discoverSubTab) {
+      // 同一页面切换四个分类标签时从顶部开始
+      el.scrollTop = 0
+      discoverScrollCache[discoverSubTab] = 0
+    }
+    mountedSubTabRef.current = discoverSubTab
+
+    const handleScroll = () => {
+      discoverScrollCache[discoverSubTab] = el.scrollTop
+    }
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      if (el.isConnected) {
+        discoverScrollCache[discoverSubTab] = el.scrollTop
+      }
+      el.removeEventListener('scroll', handleScroll)
+    }
+  }, [discoverSubTab])
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        width: 375,
-        height: frameHeight,
-        backgroundColor: '#f6f7f9',
-        overflow: 'hidden',
-        userSelect: 'none',
-      }}
-    >
+    <div className="page-shell" style={{ backgroundColor: '#f6f7f9' }}>
       <TopHeader
         activeCategory={discoverSubTab}
         onCategoryChange={setDiscoverSubTab}
@@ -635,23 +714,24 @@ export function DiscoverPage() {
         onSearchChange={setSearchQuery}
       />
 
-      {discoverSubTab === 'video' && (
-        <>
-          <DoctorCardList />
-          <VideoSection searchQuery={searchQuery} />
-          <BottomTabBar top={1481} />
-        </>
-      )}
+      <div ref={scrollRef} className="page-scroll">
+        {discoverSubTab === 'video' && (
+          <div style={{ position: 'relative', width: 375, height: 1481 - 142 }}>
+            <DoctorCardList offsetY={142} />
+            <VideoSection searchQuery={searchQuery} offsetY={142} />
+          </div>
+        )}
 
-      {discoverSubTab === 'live' && (
-        <LiveOrClassroomGrid mode="live" searchQuery={searchQuery} />
-      )}
+        {discoverSubTab === 'live' && (
+          <LiveOrClassroomGrid mode="live" searchQuery={searchQuery} />
+        )}
 
-      {discoverSubTab === 'classroom' && (
-        <LiveOrClassroomGrid mode="classroom" searchQuery={searchQuery} />
-      )}
+        {discoverSubTab === 'classroom' && (
+          <LiveOrClassroomGrid mode="classroom" searchQuery={searchQuery} />
+        )}
 
-      {discoverSubTab === 'news' && <NewsListSection searchQuery={searchQuery} />}
+        {discoverSubTab === 'news' && <NewsListSection searchQuery={searchQuery} />}
+      </div>
     </div>
   )
 }

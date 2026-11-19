@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import "tailwindcss" source("../src");
 
 *,
 *::before,
@@ -7,11 +7,13 @@
 }
 
 html,
-body {
+body,
+#root {
   margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
+  overflow: hidden;
   background-color: #f4f5f7;
   font-family: "PingFang SC", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
@@ -20,14 +22,16 @@ body {
   text-rendering: geometricPrecision;
 }
 
-/* At 375px viewport width, align strictly at top-left (0, 0) for 1:1 pixel comparison.
-   On wider viewports, center horizontally. */
+/* At 375px viewport width, align strictly at top-left (0, 0).
+   On wider viewports, center horizontally. Outer viewport never scrolls. */
 .viewport-shell {
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: stretch;
 }
 
 @media (min-width: 376px) {
@@ -36,19 +40,67 @@ body {
   }
 }
 
-.fixed-top-header {
-  position: fixed;
-  top: 0;
-  left: 0;
+.app-frame {
+  position: relative;
   width: 375px;
-  z-index: 40;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: #f6f7f9;
+  flex-shrink: 0;
+  user-select: none;
 }
 
-@media (min-width: 376px) {
-  .fixed-top-header {
-    left: 50%;
-    transform: translateX(-50%);
-  }
+.app-page-slot {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: 375px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.page-shell {
+  position: relative;
+  width: 375px;
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+.page-top {
+  position: relative;
+  width: 375px;
+  flex-shrink: 0;
+  z-index: 20;
+}
+
+.page-scroll {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  width: 375px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.page-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.page-bottom-bar {
+  position: relative;
+  width: 375px;
+  flex-shrink: 0;
+  z-index: 20;
 }
 
 .figma-canvas {
@@ -91,3 +143,104 @@ body {
   margin: 0;
   z-index: 3;
 }
+
+@keyframes liveLikeFloatUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0px, 0px, 0) scale(0.75);
+  }
+  12% {
+    opacity: 0.96;
+    transform: translate3d(4px, -16px, 0) scale(0.96);
+  }
+  48% {
+    opacity: 0.92;
+    transform: translate3d(-6px, -68px, 0) scale(1.04);
+  }
+  82% {
+    opacity: 0.52;
+    transform: translate3d(4px, -118px, 0) scale(0.98);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-2px, -148px, 0) scale(0.86);
+  }
+}
+
+@keyframes liveLikeFloatUpAlt {
+  0% {
+    opacity: 0;
+    transform: translate3d(0px, 0px, 0) scale(0.75);
+  }
+  14% {
+    opacity: 0.96;
+    transform: translate3d(-5px, -18px, 0) scale(0.98);
+  }
+  52% {
+    opacity: 0.9;
+    transform: translate3d(6px, -72px, 0) scale(1.05);
+  }
+  84% {
+    opacity: 0.48;
+    transform: translate3d(-4px, -122px, 0) scale(0.96);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(2px, -152px, 0) scale(0.84);
+  }
+}
+
+@keyframes liveLikeBurstPop {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, 6px, 0) scale(0.45);
+  }
+  28% {
+    opacity: 1;
+    transform: translate3d(-50%, -10px, 0) scale(1.04);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, -28px, 0) scale(1.16);
+  }
+}
+
+.live-like-spawn {
+  animation: liveLikeFloatUp 1.65s cubic-bezier(0.22, 0.72, 0.35, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.live-like-spawn-alt {
+  animation: liveLikeFloatUpAlt 1.75s cubic-bezier(0.22, 0.72, 0.35, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.live-like-burst {
+  animation: liveLikeBurstPop 0.52s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes liveScreenLikeBurst {
+  0% {
+    opacity: 0;
+    transform: translate3d(-50%, -50%, 0) scale(0.45) rotate(-8deg);
+  }
+  26% {
+    opacity: 1;
+    transform: translate3d(-50%, -62%, 0) scale(1.12) rotate(4deg);
+  }
+  60% {
+    opacity: 0.96;
+    transform: translate3d(-50%, -72%, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(-50%, -98%, 0) scale(1.18);
+  }
+}
+
+.live-screen-like-burst {
+  animation: liveScreenLikeBurst 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.28) forwards;
+  will-change: transform, opacity;
+}
+
